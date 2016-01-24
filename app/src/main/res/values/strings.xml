@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Red Tick</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Red Tick</string>
+    <string name="title_activity_assignment">Assignments</string>
+    <string name="title_activity_performance">Performance Chart</string>
+    <string name="title_activity_result">Result</string>
+    <string name="title_activity_message">Messages</string>
+    <string name="title_activity_attendance">Attendance</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_course">Course</string>
+</resources>
