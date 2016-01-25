@@ -9,5 +9,11 @@ public class URL {
         String url = "student/assignments/1.json";
         return Constants.BASE_URL + url;
     }
+    public static String getStudentLoginURL()
+    {
+        String url1="auth/login.json";
+        return Constants.BASE_URL + url1;
+    }
+
 
 }

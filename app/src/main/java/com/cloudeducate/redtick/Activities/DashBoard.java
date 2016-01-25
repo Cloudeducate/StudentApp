@@ -12,6 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cloudeducate.redtick.R;
+import com.cloudeducate.redtick.Utils.Constants;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class DashBoard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +27,10 @@ public class DashBoard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle recieved=new Bundle();
+        recieved=getIntent().getExtras();
+        String jsondata=recieved.getString("key");
+        parsejsondata(jsondata);
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +50,19 @@ public class DashBoard extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    public void parsejsondata(String jsonstring)
+    {
+        try {
+            JSONObject jsonobj=new JSONObject(jsonstring);
+            JSONObject user=jsonobj.getJSONObject(Constants.USER);
+            String name=user.getString(Constants.NAME);
+            String email=user.getString(Constants.EMAIL);
+            String phone=user.getString(Constants.PHONE);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

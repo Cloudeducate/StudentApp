@@ -16,5 +16,17 @@ public class Constants {
     public static final String ASSIGNMENT_ID = "id";
     public static final String ASSIGNMENT_STATUS = "submitted";
 
+    public static final String USER = "user";
+    public static final String NAME = "_name";
+    public static final String META = "meta";
+    public static final String METAVALUE = "_meta_value";
+    public static final String EMAIL = "_email";
+    public static final String PHONE = "_phone";
+    public static final String SCHOLAR = "scholar";
+
+
+
+
+
 
 }
