@@ -120,6 +120,10 @@ public class DashBoard extends AppCompatActivity
             Intent intent = new Intent(DashBoard.this, ProfileActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.nav_courses) {
+            Intent intent = new Intent(DashBoard.this, CourseActivity.class);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

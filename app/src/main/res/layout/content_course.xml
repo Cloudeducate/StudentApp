@@ -12,4 +12,15 @@
     tools:context="com.cloudeducate.redtick.Activities.CourseActivity"
     tools:showIn="@layout/activity_course">
 
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvcourses">
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
 </RelativeLayout>

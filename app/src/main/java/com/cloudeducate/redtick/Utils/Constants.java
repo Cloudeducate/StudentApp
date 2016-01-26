@@ -33,6 +33,10 @@ public class Constants {
     public static final String AVERAGE="average";
     public static final String YEAR="year";
 
+    public static final String COURSES="courses";
+    public static final String COURSE_ID="course_id";
+    public static final String TITLE="_title";
+
 
 
 

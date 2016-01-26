@@ -52,7 +52,6 @@ import java.util.Set;
 public class ResultActivity extends AppCompatActivity {
 
     String metadata;
-    RecyclerView rvresult;
     SharedPreferences sharedpref;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -94,9 +93,6 @@ public class ResultActivity extends AppCompatActivity {
         }
     void resulttask()
     {
-        rvresult = (RecyclerView) findViewById(R.id.rvresult);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        rvresult.setLayoutManager(llm);
         Set<String> defaultval = new HashSet<String>();
         defaultval.add("English");
         defaultval.add("Mathmatics");
@@ -112,22 +108,7 @@ public class ResultActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        course_id = "0";
-                        break;
-                    case 1:
-                        course_id = "1";
-                        break;
-                    case 2:
-                        course_id = "2";
-                        break;
-                    case 3:
-                        course_id = "3";
-                        break;
-                    default:
-                        course_id = "1";
-                }
+                course_id=Integer.toString(position);
                 fetchResult();
             }
 

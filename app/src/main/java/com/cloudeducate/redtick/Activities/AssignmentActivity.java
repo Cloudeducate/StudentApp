@@ -1,12 +1,18 @@
 package com.cloudeducate.redtick.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -31,8 +37,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AssignmentActivity extends AppCompatActivity {
 
@@ -41,6 +50,9 @@ public class AssignmentActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private List<Assignment> list = new ArrayList<Assignment>();
     private RecyclerView mRecyclerView;
+    private SharedPreferences sharedpref;
+    private String course_id;
+    private String metadata;
     private AssignmentRecyclerviewAdapter assignmentRecyclerviewAdapter;
 
     public static final String TAG = "test";
@@ -51,6 +63,9 @@ public class AssignmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_assignment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+        metadata = sharedpref.getString(getString(R.string.metavalue), "null");
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +81,37 @@ public class AssignmentActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(AssignmentActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
+        subjectspinnertask();
         fetchData();
 
+    }
+
+    public void subjectspinnertask()
+    {
+        Set<String> defaultval = new HashSet<String>();
+        defaultval.add("English");
+        defaultval.add("Mathmatics");
+        Set<String> values= sharedpref.getStringSet(getString(R.string.courses),defaultval);
+        Spinner spinner = (Spinner) findViewById(R.id.course_spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item,values.toArray());
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                course_id = Integer.toString(position);
+                fetchData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     public void fetchData() {
@@ -75,7 +119,7 @@ public class AssignmentActivity extends AppCompatActivity {
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
         showProgressDialog();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL.getStudentAssignmentRequestURL(), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL.getStudentAssignmentRequestURL(course_id), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 progressDialog.dismiss();
@@ -102,7 +146,16 @@ public class AssignmentActivity extends AppCompatActivity {
                     Log.v(TAG, "Response = " + "ParseError");
                 }
             }
-        });
+        })
+        {
+            @Override
+            public Map<String,String> getHeaders() throws com.android.volley.AuthFailureError{
+                Map<String,String> params=new HashMap<String,String>();
+                params.put("X-App","student");
+                params.put("X-Access-Token",metadata);
+                return params;
+            };
+        };
 
         requestQueue.add(jsonObjectRequest);
     }

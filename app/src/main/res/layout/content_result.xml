@@ -23,7 +23,13 @@
             android:text="SUBJECTS"
             android:textSize="20dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textColor="@color/colorAccent"
+            android:textStyle="normal"
+            android:singleLine="true"
+            android:ellipsize="marquee"/>
         <Spinner
             android:id="@+id/courses_spinner"
             android:layout_width="fill_parent"

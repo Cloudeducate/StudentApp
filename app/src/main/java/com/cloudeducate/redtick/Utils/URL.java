@@ -5,9 +5,9 @@ package com.cloudeducate.redtick.Utils;
  */
 public class URL {
 
-    public static String getStudentAssignmentRequestURL() {
-        String url = "student/assignments/1.json";
-        return Constants.BASE_URL + url;
+    public static String getStudentAssignmentRequestURL(String course_id) {
+        String url = "student/assignments/";
+        return Constants.BASE_URL + url + course_id + ".json";
     }
     public static String getStudentLoginURL()
     {
@@ -18,6 +18,11 @@ public class URL {
     {
         String url2="student/result.json";
         return Constants.BASE_URL + url2;
+    }
+    public static String getCoursesURL()
+    {
+        String url3="student.json";
+        return Constants.BASE_URL + url3;
     }
 
 
