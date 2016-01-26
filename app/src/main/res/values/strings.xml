@@ -15,4 +15,5 @@
     <string name="title_activity_course">Course</string>
     <string name="preference">prefrencekey</string>
     <string name="metavalue">metakey</string>
+    <string name="courses">courseid</string>
 </resources>

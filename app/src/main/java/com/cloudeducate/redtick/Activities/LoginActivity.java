@@ -26,6 +26,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.cloudeducate.redtick.Adapters.AssignmentRecyclerviewAdapter;
 import com.cloudeducate.redtick.Model.Assignment;
 import com.cloudeducate.redtick.R;
@@ -101,15 +102,15 @@ public class LoginActivity extends AppCompatActivity {
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
         showProgressDialog();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL.getStudentLoginURL(), new Response.Listener<JSONObject>() {
+        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, URL.getStudentLoginURL(), new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
                 //progressDialog.dismiss();
-                if (response.toString() == null) {
+                if (response == null) {
                     Log.v(TAG, "fetchData is not giving a fuck");
                 }
-                Log.v(TAG, "response = " + response.toString());
-               parseJson(response.toString());
+                Log.v(TAG, "response = " + response);
+               parseJson(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -128,14 +129,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         })
         {
+            @Override
             protected Map<String,String> getParams() throws com.android.volley.AuthFailureError{
                 Map<String,String> params=new HashMap<String,String>();
-                Log.v("MyApp","post parameter " + usernameWrapper.toString() + passwordWrapper.toString());
-                params.put("username", usernameWrapper.toString());
-                params.put("password",passwordWrapper.toString());
+                Log.v("MyApp","post parameter " + usernameWrapper.getEditText().getText().toString() + passwordWrapper.getEditText().getText().toString());
+                params.put("username", usernameWrapper.getEditText().getText().toString());
+                params.put("password",passwordWrapper.getEditText().getText().toString());
                 params.put("action","logmein");
                 return params;
             }
+            @Override
             public Map<String,String> getHeaders() throws com.android.volley.AuthFailureError{
                 Map<String,String> params=new HashMap<String,String>();
                 params.put("X-Student-App","true");

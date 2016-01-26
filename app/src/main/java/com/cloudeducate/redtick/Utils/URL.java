@@ -14,6 +14,11 @@ public class URL {
         String url1="auth/login.json";
         return Constants.BASE_URL + url1;
     }
+    public static String getResultRequestURL()
+    {
+        String url2="student/result.json";
+        return Constants.BASE_URL + url2;
+    }
 
 
 }
