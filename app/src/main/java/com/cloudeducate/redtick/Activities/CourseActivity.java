@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +25,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cloudeducate.redtick.Adapters.CourseRecyclerviewAdapter;
-import com.cloudeducate.redtick.Adapters.ResultRecyclerviewAdapter;
 import com.cloudeducate.redtick.Model.Courses;
-import com.cloudeducate.redtick.Model.Result;
 import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
 import com.cloudeducate.redtick.Utils.URL;
@@ -76,8 +74,10 @@ public class CourseActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,1);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.rvcourses);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(CourseActivity.this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
         fetchCourses();
