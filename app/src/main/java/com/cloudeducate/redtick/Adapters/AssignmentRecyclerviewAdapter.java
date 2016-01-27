@@ -31,7 +31,7 @@ public class AssignmentRecyclerviewAdapter extends RecyclerView.Adapter<Assignme
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.assignment_card_item, null);
+                .inflate(R.layout.assignment_item_layout, null);
 
         // create ViewHolder
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
@@ -45,11 +45,11 @@ public class AssignmentRecyclerviewAdapter extends RecyclerView.Adapter<Assignme
         holder.desc.setText(list.get(position).getDescription());
         holder.deadline.setText("Deadline : "+list.get(position).getDeadline());
         holder.course.setText(list.get(position).getCourse());
-        holder.filename.setText(list.get(position).getFilename());
+        holder.filename.setText("File : " + list.get(position).getFilename());
         if (list.get(position).getSubmitted() == true){
             holder.status.setText("Done");
         }else {
-            holder.status.setText("NC");
+            holder.status.setText("Not Submitted");
         }
 
     }

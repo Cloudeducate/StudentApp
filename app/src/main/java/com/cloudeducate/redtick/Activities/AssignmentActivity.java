@@ -82,7 +82,7 @@ public class AssignmentActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         subjectspinnertask();
-        fetchData();
+        //fetchData();
 
     }
 
@@ -109,7 +109,7 @@ public class AssignmentActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                fetchData();
             }
         });
     }
@@ -119,10 +119,12 @@ public class AssignmentActivity extends AppCompatActivity {
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
         showProgressDialog();
+        if (course_id == null){
+            course_id = "0";
+        }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL.getStudentAssignmentRequestURL(course_id), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                progressDialog.dismiss();
                 if (response.toString() == null) {
                     Log.v(TAG, "fetchData is not giving a fuck");
                 }
@@ -130,6 +132,7 @@ public class AssignmentActivity extends AppCompatActivity {
                 list = parseJson(response.toString());
                 assignmentRecyclerviewAdapter = new AssignmentRecyclerviewAdapter(AssignmentActivity.this, list);
                 mRecyclerView.setAdapter(assignmentRecyclerviewAdapter);
+                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
