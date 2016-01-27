@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,11 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.cloudeducate.redtick.Adapters.AssignmentRecyclerviewAdapter;
 import com.cloudeducate.redtick.Adapters.ResultRecyclerviewAdapter;
-import com.cloudeducate.redtick.Model.Assignment;
 import com.cloudeducate.redtick.Model.Result;
 import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
@@ -41,7 +36,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,7 +53,7 @@ public class ResultActivity extends AppCompatActivity {
     private List<Result> list = new ArrayList<Result>();
     private RecyclerView mRecyclerView;
     private ResultRecyclerviewAdapter resultRecyclerviewAdapter;
-    private final String TAG="MyApp";
+    private final String TAG = "MyApp";
     String course_id;
 
     @Override
@@ -73,14 +67,14 @@ public class ResultActivity extends AppCompatActivity {
         metadata = sharedpref.getString(getString(R.string.metavalue), "null");
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         resulttask();
 
@@ -88,19 +82,19 @@ public class ResultActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(ResultActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
-        fetchResult();
+        //fetchResult();
 
-        }
-    void resulttask()
-    {
+    }
+
+    void resulttask() {
         Set<String> defaultval = new HashSet<String>();
         defaultval.add("English");
         defaultval.add("Mathmatics");
-        Set<String> values= sharedpref.getStringSet(getString(R.string.courses),defaultval);
+        Set<String> values = sharedpref.getStringSet(getString(R.string.courses), defaultval);
         Spinner spinner = (Spinner) findViewById(R.id.courses_spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item,values.toArray());
+                android.R.layout.simple_spinner_item, values.toArray());
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
@@ -108,23 +102,25 @@ public class ResultActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                course_id=Integer.toString(position);
+                course_id = Integer.toString(position);
                 fetchResult();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                fetchResult();
             }
         });
     }
 
-    void fetchResult()
-    {
+    void fetchResult() {
         Log.v(TAG, "fetchData is called");
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
         showProgressDialog();
+        if (course_id == null){
+            course_id = "0";
+        }
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, URL.getResultRequestURL(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -152,22 +148,26 @@ public class ResultActivity extends AppCompatActivity {
                     Log.v(TAG, "Response = " + "ParseError");
                 }
             }
-        })
-        {
+        }) {
             @Override
-            protected Map<String,String> getParams() throws com.android.volley.AuthFailureError{
-                Map<String,String> params=new HashMap<String,String>();
-                Log.v("MyApp", "post parameter "+course_id);
-                params.put("course", course_id );
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.v("MyApp", "post parameter " + course_id);
+                params.put("course", course_id);
                 return params;
-            };
+            }
+
+            ;
+
             @Override
-            public Map<String,String> getHeaders() throws com.android.volley.AuthFailureError{
-                Map<String,String> params=new HashMap<String,String>();
-                params.put("X-App","student");
-                params.put("X-Access-Token",metadata);
+            public Map<String, String> getHeaders() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("X-App", "student");
+                params.put("X-Access-Token", metadata);
                 return params;
-            };
+            }
+
+            ;
         };
 
         requestQueue.add(jsonObjectRequest);
@@ -224,7 +224,6 @@ public class ResultActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.show();
     }
-
 
 
 }

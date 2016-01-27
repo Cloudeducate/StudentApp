@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cloudeducate.redtick.Model.Assignment;
 import com.cloudeducate.redtick.Model.Result;
 import com.cloudeducate.redtick.R;
 
@@ -32,7 +31,7 @@ public class ResultRecyclerviewAdapter extends RecyclerView.Adapter<ResultRecycl
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.result_card_item, null);
+                .inflate(R.layout.result_item_layout, null);
 
         // create ViewHolder
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
@@ -44,9 +43,9 @@ public class ResultRecyclerviewAdapter extends RecyclerView.Adapter<ResultRecycl
 
         holder.exam.setText(list.get(position).getexam());
         holder.year.setText(list.get(position).getyear());
-        holder.marks.setText("MARKS : "+list.get(position).getmarks());
-        holder.highest.setText("HIGHEST :"+list.get(position).gethighest());
-        holder.average.setText("AVERAGE :"+list.get(position).getaverage());
+        holder.marks.setText("MARKS : \n\n"+list.get(position).getmarks());
+        holder.highest.setText("HIGHEST :\n\n"+list.get(position).gethighest());
+        holder.average.setText("AVERAGE :\n\n"+list.get(position).getaverage());
     }
 
 
