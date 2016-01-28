@@ -1,7 +1,5 @@
 package com.cloudeducate.redtick.Utils;
 
-import java.security.PublicKey;
-
 /**
  * Created by yogesh on 21/1/16.
  */
@@ -26,20 +24,19 @@ public class Constants {
     public static final String PHONE = "_phone";
     public static final String SCHOLAR = "scholar";
 
-    public static final String RESULT="results";
-    public static final String HIGHEST="highest";
-    public static final String TYPE="type";
-    public static final String MARKS="marks";
-    public static final String AVERAGE="average";
-    public static final String YEAR="year";
+    public static final String RESULT = "results";
+    public static final String HIGHEST = "highest";
+    public static final String TYPE = "type";
+    public static final String MARKS = "marks";
+    public static final String AVERAGE = "average";
+    public static final String YEAR = "year";
 
-    public static final String COURSES="courses";
-    public static final String COURSE_ID="course_id";
-    public static final String TITLE="_title";
-
-
+    public static final String COURSES = "courses";
+    public static final String COURSE_ID = "course_id";
+    public static final String TITLE = "_title";
 
 
+    public static final String PROFILE = "profile";
 
 
 }

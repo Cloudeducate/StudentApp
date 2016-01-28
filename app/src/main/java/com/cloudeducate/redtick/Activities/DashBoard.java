@@ -20,6 +20,8 @@ import org.json.JSONObject;
 public class DashBoard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    String jsondata;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,7 @@ public class DashBoard extends AppCompatActivity
 
         Bundle recieved=new Bundle();
         recieved=getIntent().getExtras();
-        String jsondata=recieved.getString("key");
+        jsondata=recieved.getString("key");
         parsejsondata(jsondata);
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +120,7 @@ public class DashBoard extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(DashBoard.this, ProfileActivity.class);
+            intent.putExtra(Constants.PROFILE, jsondata);
             startActivity(intent);
         }
         else if (id == R.id.nav_courses) {
