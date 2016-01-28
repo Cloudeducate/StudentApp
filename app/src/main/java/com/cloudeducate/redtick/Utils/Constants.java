@@ -22,7 +22,14 @@ public class Constants {
     public static final String METAVALUE = "_meta_value";
     public static final String EMAIL = "_email";
     public static final String PHONE = "_phone";
+    public static final String ORGANIZATION="organization";
+    public static final String CLASSROOM = "classroom";
+    public static final String SECTION = "_section";
+    public static final String REMARKS = "_remarks";
+
+
     public static final String SCHOLAR = "scholar";
+    public static final String ROLL_NO="_roll_no";
 
     public static final String RESULT = "results";
     public static final String HIGHEST = "highest";
@@ -34,6 +41,11 @@ public class Constants {
     public static final String COURSES = "courses";
     public static final String COURSE_ID = "course_id";
     public static final String TITLE = "_title";
+
+    public static final String Attendance_Title="title";
+    public static final String Attendance_Start="start";
+    public static final String Attendance_End="end";
+
 
 
     public static final String PROFILE = "profile";
