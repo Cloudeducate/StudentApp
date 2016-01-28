@@ -65,6 +65,20 @@ http://cloudeducate.com/student/assignments/{$course_id}.json
 http://cloudeducate.com/public/assets/uploads/assignments/filename
 ```
 
+### View Assignment Result  ###
+- $assignment_id: Id of the assignment whose result is to be viewed
+
+This will return the Submission Model for the student who submitted the assignment
+
+Important data:
+- grade: Will contain the grade for the submission on a scale of 1 to 5 (best)
+- remarks: Remarks given by the teacher
+- live: (boolean) 1 => 'accepted', 0 => 'rejected'
+
+```
+http://cloudeducate.com/assignments/result/{$assignment_id}.json
+```
+
 ### Submit Assignment ###
 POST Request parameters
 - response (Containing the response file) (Max file size for upload is 6MB)
