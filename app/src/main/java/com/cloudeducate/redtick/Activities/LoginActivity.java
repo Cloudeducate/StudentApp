@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -25,16 +24,12 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.cloudeducate.redtick.Adapters.AssignmentRecyclerviewAdapter;
-import com.cloudeducate.redtick.Model.Assignment;
 import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
 import com.cloudeducate.redtick.Utils.URL;
 import com.cloudeducate.redtick.Volley.VolleySingleton;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private List<DashBoard> list = new ArrayList<DashBoard>();
     public static final String TAG = "MyApp";
-     TextInputLayout usernameWrapper;
+    TextInputLayout usernameWrapper;
     TextInputLayout passwordWrapper;
 
     @Override
@@ -71,8 +66,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });*/
 
-         usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
-      passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
+        usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+        passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
         usernameWrapper.setHint("Username");
         passwordWrapper.setHint("Password");
         login = (Button) findViewById(R.id.login);
@@ -81,23 +76,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 hideKeyboard();
                 loginrequest();
-               // Intent intent = new Intent(LoginActivity.this, DashBoard.class);
+                // Intent intent = new Intent(LoginActivity.this, DashBoard.class);
                 /*if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
                     getWindow().setExitTransition(new Explode());
                     startActivity(intent,
                             ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
                     finish();
                 } else {*/
-                    //startActivity(intent);
-                    finish();
+                //startActivity(intent);
+                //finish();
                 //}
             }
         });
 
     }
 
-    private void loginrequest()
-    {
+    private void loginrequest() {
         Log.v(TAG, "fetchData is called");
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
@@ -110,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.v(TAG, "fetchData is not giving a fuck");
                 }
                 Log.v(TAG, "response = " + response);
-               parseJson(response);
+                parseJson(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -127,21 +121,21 @@ public class LoginActivity extends AppCompatActivity {
                     Log.v(TAG, "Response = " + "ParseError");
                 }
             }
-        })
-        {
+        }) {
             @Override
-            protected Map<String,String> getParams() throws com.android.volley.AuthFailureError{
-                Map<String,String> params=new HashMap<String,String>();
-                Log.v("MyApp","post parameter " + usernameWrapper.getEditText().getText().toString() + passwordWrapper.getEditText().getText().toString());
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.v("MyApp", "post parameter " + usernameWrapper.getEditText().getText().toString() + passwordWrapper.getEditText().getText().toString());
                 params.put("username", usernameWrapper.getEditText().getText().toString());
-                params.put("password",passwordWrapper.getEditText().getText().toString());
-                params.put("action","logmein");
+                params.put("password", passwordWrapper.getEditText().getText().toString());
+                params.put("action", "logmein");
                 return params;
             }
+
             @Override
-            public Map<String,String> getHeaders() throws com.android.volley.AuthFailureError{
-                Map<String,String> params=new HashMap<String,String>();
-                params.put("X-Student-App","true");
+            public Map<String, String> getHeaders() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("X-Student-App", "true");
                 return params;
             }
         };
@@ -158,20 +152,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Creating JSONArray from JSONObject
                 JSONObject jsonmeta = jsonObjMain.getJSONObject(Constants.META);
-                String metavalue=jsonmeta.getString(Constants.METAVALUE);
-                if(metavalue!=null) {
-                    Bundle json=new Bundle();
-                    json.putString("key",jsonString);
+                String metavalue = jsonmeta.getString(Constants.METAVALUE);
+                if (metavalue != null) {
+                    Bundle json = new Bundle();
+                    json.putString("key", jsonString);
 
-                    SharedPreferences sharedpref=this.getSharedPreferences(getString(R.string.preference),Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor=sharedpref.edit();
+                    SharedPreferences sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpref.edit();
                     editor.putString(getString(R.string.metavalue), metavalue);
                     editor.commit();
 
-                    Intent dashboard =new Intent(this,DashBoard.class).putExtras(json);
+                    Intent dashboard = new Intent(this, DashBoard.class).putExtras(json);
                     startActivity(dashboard);
                 }
-
 
 
             } catch (JSONException e) {
@@ -182,6 +175,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
     private void hideKeyboard() {
         View view = getCurrentFocus();
         if (view != null) {
