@@ -24,6 +24,11 @@ public class URL {
         String url3="student.json";
         return Constants.BASE_URL + url3;
     }
+    public static String getAttendanceURL()
+    {
+        String url4="student/attendance.json";
+        return Constants.BASE_URL + url4;
+    }
 
     public static String getAssignmentDownloadURL(String filename){
         String url4 = "public/assets/uploads/assignments/" + filename;

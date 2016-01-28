@@ -8,12 +8,16 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 
+import java.util.Calendar;
+
 /**
  * Created by yogesh on 28/1/16.
  */
 public class AbsentDecorator implements DayViewDecorator {
 
     private final Drawable drawable;
+    private final Calendar calendar = Calendar.getInstance();
+
 
     public AbsentDecorator(Activity context) {
         drawable = context.getResources().getDrawable(R.drawable.absent_selector);
@@ -21,6 +25,7 @@ public class AbsentDecorator implements DayViewDecorator {
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
+        day.copyTo(calendar);
         return true;
     }
 
