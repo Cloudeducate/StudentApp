@@ -20,12 +20,12 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                app:cardPreventCornerOverlap="false"
-                android:layout_marginTop="35dp">
+                android:layout_marginTop="15dp"
+                android:background="?selectableItemBackground"
+                app:cardPreventCornerOverlap="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -42,67 +42,60 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="4"
                             android:layout_height="wrap_content"
+                            android:layout_weight="4"
                             android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_margin="6dp"
-                                android:background="@drawable/ic_assignment_pink"
-                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:id="@+id/restaurant_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
+                                android:ellipsize="marquee"
                                 android:fontFamily="sans-serif"
                                 android:paddingLeft="10dp"
+                                android:singleLine="true"
                                 android:text="Assignment"
                                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="25sp"
-                                android:textStyle="normal"
-                                android:singleLine="true"
-                                android:ellipsize="marquee"/>
+                                android:textColor="@color/md_amber_900"
+                                android:textSize="18dp"
+                                android:textStyle="normal" />
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
-                            android:gravity="center|right">
+                        <!-- <LinearLayout
+                             android:layout_width="0dp"
+                             android:layout_height="match_parent"
+                             android:layout_weight="1"
+                             android:gravity="center|right">
 
-                            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/restaurant_rating"
-                                android:layout_width="40dp"
-                                android:layout_height="25dp"
-                                android:layout_gravity="center"
-                                android:layout_marginRight="12dp"
-                                android:background="?selectableItemBackground"
-                                card_view:cardCornerRadius="6dp"
-                                card_view:cardElevation="2dp"
-                                card_view:cardPreventCornerOverlap="false">
+                             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                 android:id="@+id/restaurant_rating"
+                                 android:layout_width="40dp"
+                                 android:layout_height="25dp"
+                                 android:layout_gravity="center"
+                                 android:layout_marginRight="12dp"
+                                 android:background="?selectableItemBackground"
+                                 card_view:cardCornerRadius="6dp"
+                                 card_view:cardElevation="2dp"
+                                 card_view:cardPreventCornerOverlap="false">
 
-                                <TextView
-                                    android:id="@+id/restaurant_rating_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:text="3.9"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                    android:textColor="@color/md_green_500"
-                                    android:textSize="13dp"
-                                    android:textStyle="normal" />
+                                 <TextView
+                                     android:id="@+id/restaurant_rating_text"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:layout_gravity="center"
+                                     android:gravity="center"
+                                     android:text="3.9"
+                                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                     android:textColor="@color/md_green_500"
+                                     android:textSize="13dp"
+                                     android:textStyle="normal" />
 
-                            </android.support.v7.widget.CardView>
+                             </android.support.v7.widget.CardView>
 
-                        </LinearLayout>
+                         </LinearLayout>-->
 
 
                     </LinearLayout>
@@ -110,14 +103,14 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="4"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="@dimen/big_margin">
+                        android:layout_marginLeft="@dimen/big_margin"
+                        android:layout_weight="4"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_margin="6dp"
                             android:background="@drawable/ic_assessment_grey"
                             android:scaleType="centerCrop" />
@@ -125,24 +118,23 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total assignment : 6"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_blue_grey_700"
                             android:padding="@dimen/small_padding"
-                            />
+                            android:text="Total assignment : 6"
+                            android:textColor="@color/md_blue_grey_700"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="4"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="@dimen/big_margin">
+                        android:layout_marginLeft="@dimen/big_margin"
+                        android:layout_weight="4"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_margin="6dp"
                             android:background="@drawable/ic_assignment_turned_in_greenp"
                             android:scaleType="centerCrop" />
@@ -150,24 +142,23 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Completed assignment : 4"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_green_500"
                             android:padding="@dimen/small_padding"
-                            />
+                            android:text="Completed assignment : 4"
+                            android:textColor="@color/md_green_500"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="4"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="@dimen/big_margin">
+                        android:layout_marginLeft="@dimen/big_margin"
+                        android:layout_weight="4"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_margin="6dp"
                             android:background="@drawable/ic_assignment_late_red"
                             android:scaleType="centerCrop" />
@@ -175,11 +166,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Remaining assignment : 2"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_red_500"
                             android:padding="@dimen/small_padding"
-                            />
+                            android:text="Remaining assignment : 2"
+                            android:textColor="@color/md_red_500"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -193,9 +183,9 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                app:cardPreventCornerOverlap="false"
+                android:layout_marginTop="15dp"
                 android:background="?selectableItemBackground"
-                android:layout_marginTop="35dp">
+                app:cardPreventCornerOverlap="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -212,37 +202,31 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="4"
                             android:layout_height="wrap_content"
+                            android:layout_weight="4"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_margin="6dp"
-                                android:background="@drawable/ic_message_pink"
-                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
+                                android:ellipsize="marquee"
                                 android:fontFamily="sans-serif"
                                 android:paddingLeft="10dp"
+                                android:singleLine="true"
                                 android:text="Messages"
                                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="25sp"
-                                android:textStyle="normal"
-                                android:singleLine="true"
-                                android:ellipsize="marquee"/>
+                                android:textColor="@color/md_amber_900"
+                                android:textSize="18dp"
+                                android:textStyle="normal" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:gravity="center|right">
 
                             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -252,10 +236,9 @@
                                 android:layout_gravity="center"
                                 android:layout_marginRight="12dp"
                                 android:foreground="?selectableItemBackground"
-                                card_view:cardCornerRadius="6dp"
+                                card_view:cardBackgroundColor="@color/md_red_600"
                                 card_view:cardElevation="2dp"
-                                card_view:cardPreventCornerOverlap="false"
-                                card_view:cardBackgroundColor="@color/md_red_600">
+                                card_view:cardPreventCornerOverlap="false">
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -278,14 +261,14 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="4"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="@dimen/big_margin">
+                        android:layout_marginLeft="@dimen/big_margin"
+                        android:layout_weight="4"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_margin="6dp"
                             android:background="@drawable/ic_chrome_reader_mode_grey"
                             android:scaleType="centerCrop" />
@@ -293,14 +276,12 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total messages : 24"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_blue_grey_700"
                             android:padding="@dimen/small_padding"
-                            />
+                            android:text="Total messages : 24"
+                            android:textColor="@color/md_blue_grey_700"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -309,12 +290,11 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
-                android:layout_marginBottom="30dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                app:cardPreventCornerOverlap="false"
-                android:layout_marginTop="35dp">
+                android:layout_marginTop="15dp"
+                android:background="?selectableItemBackground"
+                app:cardPreventCornerOverlap="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -331,37 +311,30 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="3.5"
                             android:layout_height="wrap_content"
+                            android:layout_weight="3.5"
                             android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_margin="6dp"
-                                android:background="@drawable/ic_book_pink"
-                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
+                                android:ellipsize="marquee"
                                 android:fontFamily="sans-serif"
                                 android:paddingLeft="10dp"
-                                android:text="Courses"
-                                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="25sp"
-                                android:textStyle="normal"
                                 android:singleLine="true"
-                                android:ellipsize="marquee"/>
+                                android:text="Result Update"
+                                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                                android:textColor="@color/md_amber_900"
+                                android:textSize="18dp"
+                                android:textStyle="normal" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1.5"
                             android:layout_height="match_parent"
+                            android:layout_weight="1.5"
                             android:gravity="center|right">
 
                             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -372,7 +345,6 @@
                                 android:layout_marginRight="12dp"
                                 android:background="?selectableItemBackground"
                                 card_view:cardBackgroundColor="@color/md_orange_400"
-                                card_view:cardCornerRadius="6dp"
                                 card_view:cardElevation="2dp"
                                 card_view:cardPreventCornerOverlap="false">
 
@@ -395,90 +367,134 @@
                     </LinearLayout>
 
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_weight="3"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="@dimen/big_margin">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="English"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_brown_500"
-                            android:textStyle="bold"
-                            android:padding="@dimen/small_padding"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Hindi"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_indigo_500"
-                            android:textStyle="bold"
-                            android:padding="@dimen/small_padding"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Science"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_blue_500"
-                            android:textStyle="bold"
-                            android:padding="@dimen/small_padding"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_weight="2"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="@dimen/big_margin">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Social Studies"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_amber_500"
-                            android:textStyle="bold"
-                            android:padding="@dimen/small_padding"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Mathematics"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_red_500"
-                            android:textStyle="bold"
-                            android:padding="@dimen/small_padding"
-                            />
-
-                    </LinearLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Backlog status : none"
-                            android:textSize="17sp"
-                            android:textColor="@color/md_blue_grey_700"
-                            android:padding="@dimen/small_padding"
-                            android:layout_marginLeft="@dimen/big_margin"/>
+                        android:layout_marginLeft="@dimen/big_margin"
+                        android:padding="@dimen/small_padding"
+                        android:text="Result of course English will be announced on 1st of Feb 2016"
+                        android:textColor="@color/md_blue_grey_800"
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:padding="@dimen/big_padding"
+                app:cardCornerRadius="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/big_margin">
+
+                    <TextView
+                        android:id="@+id/teacher_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Teacher's remark"
+                        android:textColor="@color/md_amber_900"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/course"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/teacher_remark"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="Science : "
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/course"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="Remark : Exhibits a positive outlook and attitude in the classroom"
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/course"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="150dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Teacher Name"
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:padding="@dimen/big_padding"
+                app:cardCornerRadius="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/big_margin">
+
+                    <TextView
+                        android:id="@+id/attendance_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Attendance remark"
+                        android:textColor="@color/md_amber_900"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/from_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/attendance_remark"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="From Date : "
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/attendance_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/from_date"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="Your percentage attendance for this month is 83% "
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+
+                </RelativeLayout>
+
             </android.support.v7.widget.CardView>
 
 
