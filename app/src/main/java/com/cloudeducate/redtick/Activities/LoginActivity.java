@@ -164,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent dashboard = new Intent(this, DashBoard.class).putExtras(json);
                     startActivity(dashboard);
+                    finish();
                 }
 
 
