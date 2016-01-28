@@ -37,6 +37,7 @@ public class Constants {
 
 
     public static final String PROFILE = "profile";
+    public static final String AppFolderName = "RedTick";
 
 
 }

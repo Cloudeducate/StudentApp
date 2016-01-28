@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,6 +58,7 @@ public class AssignmentActivity extends AppCompatActivity {
     private AssignmentRecyclerviewAdapter assignmentRecyclerviewAdapter;
 
     public static final String TAG = "test";
+    private static final int REQUEST_WRITE_STORAGE = 112;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,30 @@ public class AssignmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_assignment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        boolean success = false;
+        Log.d(TAG, Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DOWNLOADS + "/" + Constants.AppFolderName);
+        File myFolder = new File(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DOWNLOADS + "/" + Constants.AppFolderName);
+
+        if (myFolder.exists()) {
+            Log.d(TAG, "FOLDER EXISTS");
+        } else {
+
+            success = myFolder.mkdirs();
+
+            if (success) {
+                // Do something on success
+                /*Snackbar.make(getCurrentFocus().getRootView(), "created", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+
+            } else {
+                // Do something else on failure
+                throw new RuntimeException("File Error in writing new folder");
+            }
+        }
+
+        String path = myFolder.getPath();
+        Log.v(TAG, "path = " + path);
 
         sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
         metadata = sharedpref.getString(getString(R.string.metavalue), "null");
@@ -86,16 +113,15 @@ public class AssignmentActivity extends AppCompatActivity {
 
     }
 
-    public void subjectspinnertask()
-    {
+    public void subjectspinnertask() {
         Set<String> defaultval = new HashSet<String>();
         defaultval.add("English");
         defaultval.add("Mathmatics");
-        Set<String> values= sharedpref.getStringSet(getString(R.string.courses),defaultval);
+        Set<String> values = sharedpref.getStringSet(getString(R.string.courses), defaultval);
         Spinner spinner = (Spinner) findViewById(R.id.course_spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item,values.toArray());
+                android.R.layout.simple_spinner_item, values.toArray());
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
@@ -119,7 +145,7 @@ public class AssignmentActivity extends AppCompatActivity {
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
         showProgressDialog();
-        if (course_id == null){
+        if (course_id == null) {
             course_id = "0";
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL.getStudentAssignmentRequestURL(course_id), new Response.Listener<JSONObject>() {
@@ -149,15 +175,16 @@ public class AssignmentActivity extends AppCompatActivity {
                     Log.v(TAG, "Response = " + "ParseError");
                 }
             }
-        })
-        {
+        }) {
             @Override
-            public Map<String,String> getHeaders() throws com.android.volley.AuthFailureError{
-                Map<String,String> params=new HashMap<String,String>();
-                params.put("X-App","student");
-                params.put("X-Access-Token",metadata);
+            public Map<String, String> getHeaders() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("X-App", "student");
+                params.put("X-Access-Token", metadata);
                 return params;
-            };
+            }
+
+            ;
         };
 
         requestQueue.add(jsonObjectRequest);
@@ -217,5 +244,6 @@ public class AssignmentActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.show();
     }
+
 
 }

@@ -25,5 +25,10 @@ public class URL {
         return Constants.BASE_URL + url3;
     }
 
+    public static String getAssignmentDownloadURL(String filename){
+        String url4 = "public/assets/uploads/assignments/" + filename;
+        return Constants.BASE_URL + url4;
+    }
+
 
 }
