@@ -1,5 +1,9 @@
 package com.cloudeducate.redtick.Utils.decorators;
 
+import android.app.Activity;
+import android.graphics.drawable.Drawable;
+
+import com.cloudeducate.redtick.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
@@ -9,16 +13,18 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * Decorate several days with a dot
+ * Created by yogesh on 29/1/16.
  */
-public class EventDecorator implements DayViewDecorator {
+public class NewPresentDecor implements DayViewDecorator {
 
     private int color;
     private HashSet<CalendarDay> dates;
+    private Drawable drawable;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates) {
+    public NewPresentDecor(int color, Collection<CalendarDay> dates, Activity activity) {
         this.color = color;
         this.dates = new HashSet<>(dates);
+        drawable = activity.getResources().getDrawable(R.drawable.present_selector);
     }
 
     @Override
@@ -29,5 +35,7 @@ public class EventDecorator implements DayViewDecorator {
     @Override
     public void decorate(DayViewFacade view) {
         view.addSpan(new DotSpan(10, color));
+        view.setBackgroundDrawable(drawable);
     }
 }
+

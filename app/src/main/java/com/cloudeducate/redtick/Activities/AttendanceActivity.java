@@ -3,11 +3,11 @@ package com.cloudeducate.redtick.Activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +30,8 @@ import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
 import com.cloudeducate.redtick.Utils.URL;
 import com.cloudeducate.redtick.Utils.decorators.AbsentDecorator;
+import com.cloudeducate.redtick.Utils.decorators.EventDecorator;
+import com.cloudeducate.redtick.Utils.decorators.NewPresentDecor;
 import com.cloudeducate.redtick.Utils.decorators.PresentDecorator;
 import com.cloudeducate.redtick.Volley.VolleySingleton;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -66,6 +68,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnDateSelec
 
     private AbsentDecorator absentDecorator;
     private PresentDecorator presentDecorator;
+    private NewPresentDecor newPresentDecor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,11 +102,11 @@ public class AttendanceActivity extends AppCompatActivity implements OnDateSelec
         textView_date = (TextView) findViewById(R.id.textView_date);
         widget.setOnDateChangedListener(this);
         widget.setOnMonthChangedListener(this);
-        widget.addDecorators(
+        /*widget.addDecorators(
                 new AbsentDecorator(this),
                 new PresentDecorator(this),
                 absentDecorator, presentDecorator
-        );
+        );*/
 
         fetchattendance();
     }
@@ -156,6 +159,9 @@ public class AttendanceActivity extends AppCompatActivity implements OnDateSelec
 
     public void parseJson(String jsonString) {
 
+        List<CalendarDay> calendarDayListP = new ArrayList<CalendarDay>();
+        List<CalendarDay> calendarDayListA = new ArrayList<CalendarDay>();
+
         Set<String> values=new HashSet<>();
         if (jsonString != null) {
 
@@ -186,10 +192,16 @@ public class AttendanceActivity extends AppCompatActivity implements OnDateSelec
                         setday=CalendarDay.from(Integer.parseInt(onlydate[0]),Integer.parseInt(onlydate[1]),Integer.parseInt(onlydate[2]));
                         if(title.equals("Present")) {
                          Log.v(TAG,setday.toString()+title);
+                            calendarDayListP.add(setday);
                             presentDecorator.shouldDecorate(setday);
+                            //newPresentDecor = new NewPresentDecor(Color.GREEN, calendarDayListP, AttendanceActivity.this);
+                            widget.addDecorator(new EventDecorator(Color.GREEN, calendarDayListP));
                         }
-                            else if(title.equals("Absent"))
+                            else if(title.equals("Absent")) {
+                            calendarDayListA.add(setday);
                             absentDecorator.shouldDecorate(setday);
+                            widget.addDecorator(new EventDecorator(Color.RED, calendarDayListA));
+                        }
                     }
 
 
