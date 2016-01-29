@@ -67,6 +67,78 @@
                     android:textColor="@color/md_blue_grey_900"
                     android:textSize="17sp" />
 
+                <TextView
+                    android:id="@+id/rollno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="ROLL no "
+                    android:textColor="@color/md_blue_grey_900"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/phone"/>
+
+                <TextView
+                    android:id="@+id/section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rollno"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Section "
+                    android:textColor="@color/md_amber_900"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/remarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/section"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="REMARKS "
+                    android:textColor="@color/md_blue_grey_900"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/organisation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/remarks"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="organisation"
+                    android:textStyle="italic"
+                    android:textColor="@color/md_blue_grey_900"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/phoneno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="PHONE no. "
+                    android:textColor="@color/md_amber_900"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/organisation"/>
+
+                <TextView
+                    android:id="@+id/subjects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/phoneno"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Subjects studying on : "
+                    android:textColor="@color/md_blue_grey_900"
+                    android:textSize="15sp" />
+
+
+
+
+
 
             </RelativeLayout>
 
@@ -84,76 +156,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:id="@+id/rollno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="ROLL no "
-        android:textColor="@color/md_amber_900"
-        android:textSize="22sp"
-        android:layout_marginTop="40dp"
-        />
-
-    <TextView
-        android:id="@+id/section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rollno"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Section "
-        android:textColor="@color/md_amber_900"
-        android:textSize="22sp"
-        android:layout_marginTop="40dp"
-        />
-
-    <TextView
-        android:id="@+id/remarks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/section"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="REMARKS "
-        android:textColor="@color/md_blue_grey_900"
-        android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/organisation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/section"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="organisation"
-        android:textStyle="italic"
-        android:textColor="@color/md_blue_grey_900"
-        android:textSize="19sp" />
-
-    <TextView
-        android:id="@+id/phoneno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="PHONE no. "
-        android:textColor="@color/md_amber_900"
-        android:textSize="22sp"
-        android:layout_marginTop="40dp"
-        />
-
-    <TextView
-        android:id="@+id/subjects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/section"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Subjects studying on : "
-        android:textColor="@color/md_blue_grey_900"
-        android:textSize="17sp" />
-
-
 
 
 </RelativeLayout>

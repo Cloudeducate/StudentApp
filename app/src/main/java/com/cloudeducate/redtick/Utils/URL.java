@@ -35,5 +35,10 @@ public class URL {
         return Constants.BASE_URL + url4;
     }
 
+    public static String getPerformanceRequestURL()
+    {
+        String url5="/student/performance.json";
+        return Constants.BASE_URL + url5;
+    }
 
 }

@@ -51,5 +51,12 @@ public class Constants {
     public static final String PROFILE = "profile";
     public static final String AppFolderName = "RedTick";
 
+    public static final String PERFORMANCE = "performance";
+    public static final String COURSE = "course";
+    public static final String TEACHER = "teacher";
+    public static final String TRACKING = "tracking";
+    public static final String WEEK = "week";
+    public static final String GRADE = "grade";
+
 
 }
