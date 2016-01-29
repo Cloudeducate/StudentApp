@@ -92,12 +92,9 @@ public class ResultActivity extends AppCompatActivity {
         defaultval.add("Mathmatics");
         Set<String> values = sharedpref.getStringSet(getString(R.string.courses), defaultval);
         Spinner spinner = (Spinner) findViewById(R.id.courses_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, values.toArray());
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

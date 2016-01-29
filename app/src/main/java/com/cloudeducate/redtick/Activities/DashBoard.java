@@ -45,8 +45,10 @@ public class DashBoard extends AppCompatActivity
 
         Bundle recieved=new Bundle();
         recieved=getIntent().getExtras();
-        jsondata=recieved.getString("key");
-        parsejsondata(jsondata);
+        if(recieved!=null) {
+            jsondata = recieved.getString("key");
+            parsejsondata(jsondata);
+        }
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +71,13 @@ public class DashBoard extends AppCompatActivity
     public void parsejsondata(String jsonstring)
     {
         try {
-            JSONObject jsonobj=new JSONObject(jsonstring);
-            JSONObject user=jsonobj.getJSONObject(Constants.USER);
-            String name=user.getString(Constants.NAME);
-            String email=user.getString(Constants.EMAIL);
-            String phone=user.getString(Constants.PHONE);
+            if(jsonstring!=null) {
+                JSONObject jsonobj = new JSONObject(jsonstring);
+                JSONObject user = jsonobj.getJSONObject(Constants.USER);
+                String name = user.getString(Constants.NAME);
+                String email = user.getString(Constants.EMAIL);
+                String phone = user.getString(Constants.PHONE);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
