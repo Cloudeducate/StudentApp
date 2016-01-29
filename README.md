@@ -23,7 +23,7 @@ POST Request:
 
 On successful request you will receive json data 
 ```
-http://cloudeducate.com/auth/login.json
+/auth/login.json
 ```
 
 ### After Login ###
@@ -36,7 +36,7 @@ To get successful response
 
 ### Student Dashboard (after login) ###
 ```
-http://cloudeducate.com/student.json
+/student.json
 ```
 
 ### Update Profile ###
@@ -44,7 +44,7 @@ POST Request parameter
 - password
 - action = saveUser
 ```
-http://cloudeducate.com/student/profile.json
+/student/profile.json
 ```
 
 ### View Assignments  ###
@@ -58,11 +58,11 @@ Otherwise assignments for all courses will be displayed
 See the response
 
 ```
-http://cloudeducate.com/student/assignments/{$course_id}.json
+/student/assignments/{$course_id}.json
 ```
 #### Viewing Assignment Response ####
 ```
-http://cloudeducate.com/public/assets/uploads/assignments/filename
+/public/assets/uploads/assignments/filename
 ```
 
 ### View Assignment Result  ###
@@ -76,7 +76,7 @@ Important data:
 - live: (boolean) 1 => 'accepted', 0 => 'rejected'
 
 ```
-http://cloudeducate.com/assignments/result/{$assignment_id}.json
+/assignments/result/{$assignment_id}.json
 ```
 
 ### Submit Assignment ###
@@ -89,7 +89,7 @@ GET Request JSON Response
 - error: Only if last date of submission is over
 
 ```
-http://cloudeducate.com/student/submitAssignment/{$assignment_id}.json
+/student/submitAssignment/{$assignment_id}.json
 ```
 
 ###  Result ###
@@ -97,26 +97,36 @@ POST Request parameter
 - course (Containing the course_id of the subject for which result is needed)
 
 Send a GET Request to the page to see the resposne
+- $course_id (optional) Id of the course whose result you want to display
 ```
-http://cloudeducate.com/student/result.json
+/student/result/{$course_id}.json
 ```
-
 
 ### Courses ###
 Will give the courses student is studying currently
 ```
-http://cloudeducate.com/student/courses.json
+/student/courses.json
 ```
 
 ### Attendance ###
 Send a get request to see the response
 
 ```
-http://cloudeducate.com/student/attendance.json
+/student/attendance.json
+```
+
+### Performance ###
+This API will give weekly performance analysis under 'performance' key contain
+- course: Name of the course
+- teacher: Teacher who is teaching the course
+- tracking: [Array] of objects containing grade for each week
+
+```
+/student/performance/{$course_id}.json
 ```
 
 ### Events ###
 Send a get request to see the response
 ```
-http://cloudeducate.com/events/all.json
+/events/all.json
 ```
