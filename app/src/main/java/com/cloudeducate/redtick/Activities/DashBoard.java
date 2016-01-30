@@ -1,7 +1,10 @@
 package com.cloudeducate.redtick.Activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,15 +15,33 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
+import com.cloudeducate.redtick.Utils.URL;
+import com.cloudeducate.redtick.Volley.VolleySingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DashBoard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,12 +49,24 @@ public class DashBoard extends AppCompatActivity
     String jsondata;
     private static final int REQUEST_WRITE_STORAGE = 112;
 
+    private TextView totalAM, completedAM, remainingAM, attendanceRM;
+
+    SharedPreferences sharedpref;
+    String metadata;
+    private VolleySingleton volleySingleton;
+    private RequestQueue requestQueue;
+    private final String TAG="yahoo";
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+        metadata = sharedpref.getString(getString(R.string.metavalue), "null");
 
         boolean hasPermission = (ContextCompat.checkSelfPermission(DashBoard.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
@@ -58,6 +91,11 @@ public class DashBoard extends AppCompatActivity
             }
         });*/
 
+        totalAM = (TextView) findViewById(R.id.total_assgnment);
+        completedAM = (TextView) findViewById(R.id.completed_assgnement);
+        remainingAM = (TextView) findViewById(R.id.remaining_assgnment);
+        attendanceRM = (TextView) findViewById(R.id.attendance_value);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,6 +104,9 @@ public class DashBoard extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        fetchDashBoardData();
+
     }
 
     public void parsejsondata(String jsonstring)
@@ -166,6 +207,82 @@ public class DashBoard extends AppCompatActivity
                 }
             }
         }
+    }
+
+    void fetchDashBoardData(){
+
+        Log.v(TAG, "fetchData fo Courses is called");
+        volleySingleton = VolleySingleton.getMyInstance();
+        requestQueue = volleySingleton.getRequestQueue();
+        showProgressDialog();
+        StringRequest jsonObjectRequest = new StringRequest(Request.Method.GET, URL.getCoursesURL(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    UpdateDashboard(response.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (response == null) {
+                    Log.v(TAG, "fetchData is not giving a fuck");
+                }
+                Log.v(TAG, "response = " + response);
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Log.v(TAG, "Response = " + "timeOut");
+                } else if (error instanceof AuthFailureError) {
+                    Log.v(TAG, "Response = " + "AuthFail");
+                } else if (error instanceof ServerError) {
+                    Log.v(TAG, "Response = " + "ServerError");
+                } else if (error instanceof NetworkError) {
+                    Log.v(TAG, "Response = " + "NetworkError");
+                } else if (error instanceof ParseError) {
+                    Log.v(TAG, "Response = " + "ParseError");
+                }
+            }
+        })
+        {
+            @Override
+            public Map<String,String> getHeaders() throws com.android.volley.AuthFailureError{
+                Map<String,String> params=new HashMap<String,String>();
+                params.put("X-App","student");
+                params.put("X-Access-Token",metadata);
+                return params;
+            };
+        };
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private void UpdateDashboard(String jsonString) throws JSONException {
+
+        JSONObject jsonobj = new JSONObject(jsonString);
+        JSONObject assignmentObject = jsonobj.getJSONObject(Constants.ASSIGNMENTS);
+        totalAM.setText("Total assignment : " + assignmentObject.getString(Constants.ASSIGNMENT_TOTAL));
+        completedAM.setText("Completed assignment : " + assignmentObject.getString(Constants.ASSIGNMENT_SUBMITTED));
+        int total = Integer.parseInt(assignmentObject.getString(Constants.ASSIGNMENT_TOTAL));
+        int completed = Integer.parseInt(assignmentObject.getString(Constants.ASSIGNMENT_SUBMITTED));
+        int remaining = total - completed;
+        remainingAM.setText("Remaining assignment : " + String.valueOf(remaining));
+
+        String attendance = jsonobj.getString(Constants.ATTENDANCE);
+        attendanceRM.setText("Your percentage attendance for this month is " + attendance + " %");
+
+
+    }
+
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Getting Data");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
     }
 
 }

@@ -15,6 +15,8 @@ public class Constants {
     public static final String ASSIGNMENT_FILNAME = "filename";
     public static final String ASSIGNMENT_ID = "id";
     public static final String ASSIGNMENT_STATUS = "submitted";
+    public static final String ASSIGNMENT_TOTAL = "total";
+    public static final String ASSIGNMENT_SUBMITTED = "submitted";
 
     public static final String USER = "user";
     public static final String NAME = "_name";
@@ -45,7 +47,7 @@ public class Constants {
     public static final String Attendance_Title="title";
     public static final String Attendance_Start="start";
     public static final String Attendance_End="end";
-
+    public static final String ATTENDANCE = "attendance";
 
 
     public static final String PROFILE = "profile";

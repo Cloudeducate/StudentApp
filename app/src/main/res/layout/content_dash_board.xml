@@ -116,6 +116,7 @@
                             android:scaleType="centerCrop" />
 
                         <TextView
+                            android:id="@+id/total_assgnment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/small_padding"
@@ -140,6 +141,7 @@
                             android:scaleType="centerCrop" />
 
                         <TextView
+                            android:id="@+id/completed_assgnement"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/small_padding"
@@ -164,6 +166,7 @@
                             android:scaleType="centerCrop" />
 
                         <TextView
+                            android:id="@+id/remaining_assgnment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/small_padding"
