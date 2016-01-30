@@ -79,7 +79,7 @@ public class ResultActivity extends AppCompatActivity {
         resulttask();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvresult);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(ResultActivity.this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new com.cloudeducate.redtick.Utils.LinearLayoutManager(ResultActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
         //fetchResult();

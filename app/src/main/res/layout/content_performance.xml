@@ -49,6 +49,47 @@
 
                 </LinearLayout>
 
+                <!--<ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layout_upper">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">-->
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/big_padding"
+                    android:layout_marginLeft="@dimen/big_padding"
+                    android:layout_marginRight="@dimen/big_padding"
+                    android:layout_marginTop="@dimen/big_padding"
+                    android:padding="@dimen/big_padding"
+                    app:cardCornerRadius="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Performance Chart"
+                        android:textColor="@color/md_amber_900"
+                        android:textSize="18dp"
+                        android:padding="@dimen/big_margin"/>
+
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_above="@+id/seekBar1"
+                        android:layout_marginTop="50dp"/>
+
+                </android.support.v7.widget.CardView>
+
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
@@ -76,22 +117,10 @@
                             android:textSize="18dp" />
 
                         <TextView
-                            android:id="@+id/week"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/teacher_name"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="10dp"
-                            android:gravity="center_vertical"
-                            android:text="Week : "
-                            android:textColor="@color/md_blue_grey_900"
-                            android:textSize="14dp" />
-
-                        <TextView
                             android:id="@+id/description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/week"
+                            android:layout_below="@id/teacher_name"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:gravity="center_vertical"
@@ -99,23 +128,20 @@
                             android:textColor="@color/md_blue_grey_900"
                             android:textSize="14dp" />
 
-                        <TextView
-                            android:id="@+id/grade"
-                            android:layout_width="wrap_content"
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/performanceRecyclerview"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignBaseline="@id/week"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="150dp"
-                            android:layout_marginTop="10dp"
-                            android:text="Grade : "
-                            android:textColor="@color/md_blue_grey_900"
-                            android:textSize="14dp" />
+                            android:paddingTop="@dimen/big_margin"
+                            android:layout_below="@+id/description"/>
 
                     </RelativeLayout>
 
                 </android.support.v7.widget.CardView>
 
+                <!--</LinearLayout>
 
+                </ScrollView>-->
 
             </LinearLayout>
 

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.cloudeducate.redtick.Adapters.PerformanceRecyclerAdapter;
 import com.cloudeducate.redtick.Model.PerformanceTracker;
 import com.cloudeducate.redtick.Model.Result;
 import com.cloudeducate.redtick.R;
@@ -53,6 +56,8 @@ public class PerformanceActivity extends AppCompatActivity {
     private final String TAG = "yoge";
     String course_id;
     private TextView teacherName, week, grade;
+    private RecyclerView mRecyclerView;
+    private PerformanceRecyclerAdapter performanceRecyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,10 @@ public class PerformanceActivity extends AppCompatActivity {
         teacherName = (TextView) findViewById(R.id.teacher_name);
         week = (TextView) findViewById(R.id.week);
         grade = (TextView) findViewById(R.id.grade);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.performanceRecyclerview);
+        mRecyclerView.setLayoutManager(new com.cloudeducate.redtick.Utils.LinearLayoutManager(PerformanceActivity.this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setHasFixedSize(true);
 
         getPerformance();
 
@@ -173,13 +182,15 @@ public class PerformanceActivity extends AppCompatActivity {
 
     public void parseJson(String json) throws JSONException {
 
+        List<PerformanceTracker> performanceTrackerList = new ArrayList<PerformanceTracker>();
+
         JSONObject jsonObjectMain = new JSONObject(json);
         JSONObject jsonObject = jsonObjectMain.getJSONObject(Constants.PERFORMANCE);
         String teacher_name = jsonObject.getString(Constants.TEACHER);
         JSONArray trackingArray = jsonObject.getJSONArray(Constants.TRACKING);
-        teacherName.setText(teacher_name);
+        teacherName.setText("Teacher - " + teacher_name);
 
-// JSONArray has x JSONObject
+        // JSONArray has x JSONObject
         for (int i = 0; i < trackingArray.length(); i++) {
 
             PerformanceTracker performanceTracker = new PerformanceTracker();
@@ -189,11 +200,15 @@ public class PerformanceActivity extends AppCompatActivity {
 
             performanceTracker.setGrade(Integer.valueOf(object.getString(Constants.GRADE)));
             performanceTracker.setWeek(Integer.valueOf(object.getString(Constants.WEEK)));
-            grade.setText("Grade : " + object.getString(Constants.GRADE));
-            week.setText("Week : " + object.getString(Constants.WEEK));
+            /*grade.setText("Grade : " + object.getString(Constants.GRADE));
+            week.setText("Week : " + object.getString(Constants.WEEK));*/
 
+            performanceTrackerList.add(performanceTracker);
             Log.v(TAG, "test = " + String.valueOf(object.getString(Constants.GRADE)));
         }
+
+        performanceRecyclerAdapter = new PerformanceRecyclerAdapter(this, performanceTrackerList);
+        mRecyclerView.setAdapter(performanceRecyclerAdapter);
 
     }
 
