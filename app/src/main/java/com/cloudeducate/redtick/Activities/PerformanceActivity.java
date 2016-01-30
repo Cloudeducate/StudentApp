@@ -3,6 +3,7 @@ package com.cloudeducate.redtick.Activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,13 @@ import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
 import com.cloudeducate.redtick.Utils.URL;
 import com.cloudeducate.redtick.Volley.VolleySingleton;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +66,7 @@ public class PerformanceActivity extends AppCompatActivity {
     private TextView teacherName, week, grade;
     private RecyclerView mRecyclerView;
     private PerformanceRecyclerAdapter performanceRecyclerAdapter;
+    private LineChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +95,52 @@ public class PerformanceActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.performanceRecyclerview);
         mRecyclerView.setLayoutManager(new com.cloudeducate.redtick.Utils.LinearLayoutManager(PerformanceActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
+
+        mChart = (LineChart) findViewById(R.id.chart1);
+        /*mChart.setOnChartGestureListener(this);
+        mChart.setOnChartValueSelectedListener(this);*/
+
+        // no description text
+        mChart.setDescription("");
+        mChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
+
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        // mChart.setScaleXEnabled(true);
+        // mChart.setScaleYEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        mChart.setPinchZoom(true);
+
+        // set an alternative background color
+        // mChart.setBackgroundColor(Color.GRAY);
+
+        // create a custom MarkerView (extend MarkerView) and specify the layout
+        // to use for it
+        //MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view);
+
+        // set the marker to the chart
+        //mChart.setMarkerView(mv);
+
+        mChart.animateX(2500);
+        // mChart.setVisibleYRange(30, AxisDependency.LEFT);
+
+        // // restrain the maximum scale-out factor
+        // mChart.setScaleMinima(3f, 3f);
+        //
+        // // center the view to a specific position inside the chart
+        // mChart.centerViewPort(10, 50, AxisDependency.LEFT);
+
+        // get the legend (only possible after setting data)
+        Legend l = mChart.getLegend();
+
+        // modify the legend ...
+        // l.setPosition(LegendPosition.LEFT_OF_CHART);
+        l.setForm(Legend.LegendForm.LINE);
 
         getPerformance();
 
@@ -183,6 +238,7 @@ public class PerformanceActivity extends AppCompatActivity {
     public void parseJson(String json) throws JSONException {
 
         List<PerformanceTracker> performanceTrackerList = new ArrayList<PerformanceTracker>();
+        List<Integer> integerList = new ArrayList<Integer>();
 
         JSONObject jsonObjectMain = new JSONObject(json);
         JSONObject jsonObject = jsonObjectMain.getJSONObject(Constants.PERFORMANCE);
@@ -207,11 +263,18 @@ public class PerformanceActivity extends AppCompatActivity {
             Log.v(TAG, "test = " + String.valueOf(object.getString(Constants.GRADE)));
         }
 
+        JSONArray jsonArray = jsonObjectMain.getJSONArray(Constants.MONTHLY);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            integerList.add(jsonArray.getInt(i));
+        }
+
+        setData(integerList.size(), integerList);
+        Log.v("array", String.valueOf(integerList));
+
         performanceRecyclerAdapter = new PerformanceRecyclerAdapter(this, performanceTrackerList);
         mRecyclerView.setAdapter(performanceRecyclerAdapter);
 
     }
-
 
     public void showProgressDialog() {
         progressDialog = new ProgressDialog(this);
@@ -220,5 +283,67 @@ public class PerformanceActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.show();
     }
+
+    private void setData(int count, List<Integer> list) {
+
+        ArrayList<String> xVals = new ArrayList<String>();
+        for (int i = 0; i < count; i++) {
+            xVals.add("Week " + (i+1));
+        }
+
+        ArrayList<Entry> yVals = new ArrayList<Entry>();
+
+        for (int i = 0; i < count; i++) {
+
+            int val = list.get(i);
+            yVals.add(new Entry(val, i));
+        }
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(yVals, "Month's Performance ");
+        // set1.setFillAlpha(110);
+        // set1.setFillColor(Color.RED);
+
+        // set the line to be drawn like this "- - - - - -"
+        set1.setFillColor(getResources().getColor(R.color.md_cyan_800));
+        set1.setDrawFilled(true);
+        set1.setHighlightEnabled(true);
+        set1.setColor(R.color.md_grey_800);
+        set1.setCircleColor(R.color.md_deep_orange_600);
+        set1.setLineWidth(1f);
+        set1.setCircleSize(3f);
+        set1.setDrawCircleHole(false);
+        set1.setValueTextSize(9f);
+        set1.setFillAlpha(65);
+        set1.setFillColor(Color.BLACK);
+        // set1.setShader(new LinearGradient(0, 0, 0, mChart.getHeight(),
+        // Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
+
+        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
+        dataSets.add(set1); // add the datasets
+
+        // create a data object with the datasets
+        LineData data = new LineData(xVals, dataSets);
+
+        LimitLine ll1 = new LimitLine(130f, "Min grade");
+        ll1.setLineWidth(4f);
+        ll1.enableDashedLine(10f, 10f, 0f);
+        ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        ll1.setTextSize(10f);
+        ll1.setTextColor(getResources().getColor(R.color.md_green_500));
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
+        leftAxis.addLimitLine(ll1);
+        leftAxis.setAxisMaxValue(10f);
+        leftAxis.setAxisMinValue(0f);
+        leftAxis.setStartAtZero(true);
+
+        mChart.getAxisRight().setEnabled(false);
+
+        // set data
+        mChart.setData(data);
+    }
+
 
 }

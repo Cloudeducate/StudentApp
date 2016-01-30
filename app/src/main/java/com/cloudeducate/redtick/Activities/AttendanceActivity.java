@@ -108,6 +108,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnDateSelec
                 absentDecorator, presentDecorator
         );*/
 
+
         fetchattendance();
     }
 

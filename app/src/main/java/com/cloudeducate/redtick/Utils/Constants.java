@@ -49,6 +49,7 @@ public class Constants {
     public static final String Attendance_End="end";
     public static final String ATTENDANCE = "attendance";
 
+    public static final String MONTHLY = "monthly";
 
     public static final String PROFILE = "profile";
     public static final String AppFolderName = "RedTick";
