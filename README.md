@@ -130,3 +130,19 @@ Send a get request to see the response
 ```
 /events/all.json
 ```
+
+### Finding Conversations ###
+This will find the conversations in which the student is there
+- conversations: key will contain the different conversations
+```
+/conversation/find.json
+```
+
+### Message Conversation ###
+Send a POST request with
+- action: sendMessage
+- message: Message user want to send in the conversation
+
+```
+/conversation/message/{$conversation_id}.json
+```
