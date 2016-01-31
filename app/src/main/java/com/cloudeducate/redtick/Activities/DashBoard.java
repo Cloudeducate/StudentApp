@@ -180,6 +180,7 @@ public class DashBoard extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(DashBoard.this, ProfileActivity.class);
             intent.putExtra(Constants.PROFILE, jsondata);
+            //Log.v("json", jsondata);
             startActivity(intent);
         }
         else if (id == R.id.nav_courses) {
@@ -270,7 +271,6 @@ public class DashBoard extends AppCompatActivity
         int completed = Integer.parseInt(assignmentObject.getString(Constants.ASSIGNMENT_SUBMITTED));
         int remaining = total - completed;
         remainingAM.setText("Remaining assignment : " + String.valueOf(remaining));
-
         String attendance = jsonobj.getString(Constants.ATTENDANCE);
         attendanceRM.setText("Your percentage attendance for this month is " + attendance + " %");
 

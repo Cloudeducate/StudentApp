@@ -17,6 +17,8 @@ public class Constants {
     public static final String ASSIGNMENT_STATUS = "submitted";
     public static final String ASSIGNMENT_TOTAL = "total";
     public static final String ASSIGNMENT_SUBMITTED = "submitted";
+    public static final String ASSIGNMENT_MARKS = "marks";
+    public static final String ASSIGNMENT_REMARKS = "remarks";
 
     public static final String USER = "user";
     public static final String NAME = "_name";

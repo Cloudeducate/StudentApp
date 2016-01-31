@@ -84,7 +84,11 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="150dp"
                 android:layout_marginTop="10dp"
-                android:text="Deadline"
+                android:text="filename"
+                android:ems="3"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee"
+                android:singleLine="true"
                 android:textColor="@color/md_blue_grey_900"
                 android:textSize="12dp" />
 

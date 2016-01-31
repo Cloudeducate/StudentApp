@@ -217,6 +217,8 @@ public class AssignmentActivity extends AppCompatActivity {
                     assignment.setId(jsonObject.getString(Constants.ASSIGNMENT_ID));
                     assignment.setFilename(jsonObject.getString(Constants.ASSIGNMENT_FILNAME));
                     assignment.setSubmitted(Boolean.valueOf(jsonObject.getString(Constants.ASSIGNMENT_STATUS)));
+                    assignment.setMarks(jsonObject.getString(Constants.ASSIGNMENT_MARKS));
+                    assignment.setRemarks(jsonObject.getString(Constants.ASSIGNMENT_REMARKS));
 
                     Log.v(TAG, "test = " + String.valueOf(jsonObject.getString(Constants.ASSIGNMENT_TITLE)));
 

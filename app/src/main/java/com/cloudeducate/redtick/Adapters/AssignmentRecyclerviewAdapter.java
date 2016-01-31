@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.cloudeducate.redtick.Model.Assignment;
 import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
@@ -54,7 +55,7 @@ public class AssignmentRecyclerviewAdapter extends RecyclerView.Adapter<Assignme
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.title.setText(list.get(position).getTitle());
         holder.desc.setText(list.get(position).getDescription());
@@ -62,47 +63,72 @@ public class AssignmentRecyclerviewAdapter extends RecyclerView.Adapter<Assignme
         holder.course.setText(list.get(position).getCourse());
         holder.filename.setText(list.get(position).getFilename());
         if (list.get(position).getSubmitted() == true) {
+            assignmentView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new MaterialDialog.Builder(context)
+                            .title(" Marks : " + list.get(position).getMarks())
+                            .content("Teacher Remarks - " + list.get(position).getRemarks())
+                            .positiveText("OK")
+                            .show();
+
+                }
+            });
+
             holder.status.setText("Done");
         } else {
             holder.status.setText("Not Submitted");
         }
-        assignmentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                final String fileName = holder.filename.getText().toString();
-                showProgressDialog(fileName);
-                Uri downloadUri = Uri.parse(URL.getAssignmentDownloadURL(fileName));
-                Uri destinationUri = Uri.parse(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DOWNLOADS + "/" + Constants.AppFolderName + "/" + fileName);
-                Log.v("test", "destination uri = " + String.valueOf(destinationUri));
-                DownloadRequest downloadRequest = new DownloadRequest(downloadUri)
-                        //.addCustomHeader("Auth-Token", "YourTokenApiKey")
-                        .setRetryPolicy(new DefaultRetryPolicy())
-                        .setDestinationURI(destinationUri).setPriority(DownloadRequest.Priority.HIGH)
-                        .setDownloadListener(new DownloadStatusListener() {
-                            @Override
-                            public void onDownloadComplete(int id) {
-                                progressDialog.dismiss();
-                                Notify("Success");
+        if (list.get(position).getSubmitted() == false) {
+            assignmentView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final String fileName = holder.filename.getText().toString();
+                    Log.v("file", fileName);
+                    /*if (fileName == null) {
+                        new MaterialDialog.Builder(context)
+                                .title("Ops! Something went wrong")
+                                .content("Attachment not found")
+                                .positiveText("OK")
+                                .show();
 
-                            }
+                    }else {*/
+                    showProgressDialog(fileName);
+                    Uri downloadUri = Uri.parse(URL.getAssignmentDownloadURL(fileName));
+                    Uri destinationUri = Uri.parse(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DOWNLOADS + "/" + Constants.AppFolderName + "/" + fileName);
+                    Log.v("test", "destination uri = " + String.valueOf(destinationUri));
+                    DownloadRequest downloadRequest = new DownloadRequest(downloadUri)
+                            //.addCustomHeader("Auth-Token", "YourTokenApiKey")
+                            .setRetryPolicy(new DefaultRetryPolicy())
+                            .setDestinationURI(destinationUri).setPriority(DownloadRequest.Priority.HIGH)
+                            .setDownloadListener(new DownloadStatusListener() {
+                                @Override
+                                public void onDownloadComplete(int id) {
+                                    progressDialog.dismiss();
+                                    Notify("Success");
 
-                            @Override
-                            public void onDownloadFailed(int id, int errorCode, String errorMessage) {
-                                Notify("Fail");
-                            }
+                                }
 
-                            @Override
-                            public void onProgress(int id, long totalBytes, long downlaodedBytes, int progress) {
-                                progressDialog.setProgress(progress);
-                            }
-                        });
-                downloadManager = new ThinDownloadManager();
-                int downloadId = downloadManager.add(downloadRequest);
-                Log.v("test", String.valueOf(downloadId));
+                                @Override
+                                public void onDownloadFailed(int id, int errorCode, String errorMessage) {
+                                    Notify("Fail");
+                                }
 
-            }
-        });
+                                @Override
+                                public void onProgress(int id, long totalBytes, long downlaodedBytes, int progress) {
+                                    progressDialog.setProgress(progress);
+                                }
+                            });
+                    downloadManager = new ThinDownloadManager();
+                    int downloadId = downloadManager.add(downloadRequest);
+                    Log.v("test", String.valueOf(downloadId));
+                }
+                //}
+            });
+
+
+        }
 
     }
 
@@ -133,7 +159,7 @@ public class AssignmentRecyclerviewAdapter extends RecyclerView.Adapter<Assignme
         progressDialog.setMessage("Downloading " + filename);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMax(100);
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
         progressDialog.show();
     }
 
@@ -141,9 +167,13 @@ public class AssignmentRecyclerviewAdapter extends RecyclerView.Adapter<Assignme
         final NotificationManager mNotifyManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
-        switch (status){
-            case "Success" : mBuilder.setContentTitle("Download Complete"); break;
-            case "Fail" : mBuilder.setContentTitle("Download failed"); break;
+        switch (status) {
+            case "Success":
+                mBuilder.setContentTitle("Download Complete");
+                break;
+            case "Fail":
+                mBuilder.setContentTitle("Download failed");
+                break;
         }
         mBuilder.setContentTitle("Download Complete")
                 .setSmallIcon(R.drawable.ic_assessment_grey);
