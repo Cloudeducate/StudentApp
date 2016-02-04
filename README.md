@@ -131,18 +131,38 @@ Send a get request to see the response
 /events/all.json
 ```
 
-### Finding Conversations ###
+### Conversations ###
+
+#### Finding Conversations ####
 This will find the conversations in which the student is there
 - conversations: key will contain the different conversations
 ```
 /conversation/find.json
 ```
 
-### Message Conversation ###
+#### Message in Conversation ####
 Send a POST request with
 - action: sendMessage
 - message: Message user want to send in the conversation
 
 ```
 /conversation/message/{$conversation_id}.json
+```
+
+### Notifications ###
+
+#### Get notifications ####
+This will find all the notifications for the student. Send a GET request to the page to see the response
+
+```
+/notification/fetch
+```
+
+#### Updating Notification ####
+To mark the notification as read or unread. Send a POST request to this URL with params
+- read: true (to mark as read), false (to marks as unread)
+
+$notification_id (Required)
+```
+/notification/update/{$notification_id}.json
 ```
