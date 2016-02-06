@@ -16,4 +16,5 @@
     <string name="preference">prefrencekey</string>
     <string name="metavalue">metakey</string>
     <string name="courses">courseid</string>
+    <string name="title_activity_view_conversation">View Conversation</string>
 </resources>

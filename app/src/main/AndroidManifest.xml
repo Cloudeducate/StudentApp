@@ -98,6 +98,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cloudeducate.redtick.Activities.DashBoard" />
         </activity>
+        <activity
+            android:name=".Activities.ViewConversation"
+            android:label="@string/title_activity_view_conversation"
+            android:parentActivityName=".Activities.MessageActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cloudeducate.redtick.Activities.MessageActivity" />
+        </activity>
     </application>
 
 </manifest>

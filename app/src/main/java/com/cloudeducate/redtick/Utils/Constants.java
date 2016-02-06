@@ -63,5 +63,20 @@ public class Constants {
     public static final String WEEK = "week";
     public static final String GRADE = "grade";
 
+    public static final String CONVERSATION = "conversations";
+    public static final String CONV_TEACHER_NAME = "teacher";
+    public static final String CONV_ID = "id";
+
+    public static final String MESSAGE="message";
+    public static final String MESSAGES="messages";
+    public static final String CONTENT="content";
+    public static final String CREATED="created";
+    public static final String LIVE="live";
+
+    public static final String CLASS = "class";
+    public static final String USER_ID = "user_id";
+    public static final String USERNNAME = "username";
+    public static final String PASSWORD = "password";
+
 
 }
