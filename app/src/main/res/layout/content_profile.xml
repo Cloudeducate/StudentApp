@@ -16,7 +16,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@color/colorPrimaryDark"/>
+            android:background="@color/colorPrimaryDark" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_view"
@@ -37,12 +37,11 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="Name"
                     android:textColor="@color/md_amber_900"
-                    android:textSize="22sp"
-                    android:layout_marginTop="40dp"
-                    />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/email"
@@ -52,9 +51,9 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="email"
-                    android:textStyle="italic"
                     android:textColor="@color/md_blue_grey_900"
-                    android:textSize="19sp" />
+                    android:textSize="19sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/phone"
@@ -71,24 +70,23 @@
                     android:id="@+id/rollno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/phone"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="ROLL no "
                     android:textColor="@color/md_blue_grey_900"
-                    android:textSize="14sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@id/phone"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/section"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rollno"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="Section "
                     android:textColor="@color/md_amber_900"
-                    android:textSize="14sp"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/remarks"
@@ -109,20 +107,20 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="organisation"
-                    android:textStyle="italic"
                     android:textColor="@color/md_blue_grey_900"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/phoneno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/organisation"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="PHONE no. "
                     android:textColor="@color/md_amber_900"
-                    android:textSize="14sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@id/organisation"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/subjects"
@@ -136,10 +134,6 @@
                     android:textSize="15sp" />
 
 
-
-
-
-
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
@@ -148,14 +142,14 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/profile"
-        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"/>
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/profile" />
 
 
 </RelativeLayout>
