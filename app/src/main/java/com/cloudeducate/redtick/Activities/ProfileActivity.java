@@ -43,14 +43,6 @@ public class ProfileActivity extends AppCompatActivity {
         sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
         Set<String> values = sharedpref.getStringSet(getString(R.string.courses), defaultval);
         values.toArray();
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         name = (TextView) findViewById(R.id.name);
@@ -61,10 +53,8 @@ public class ProfileActivity extends AppCompatActivity {
        section = (TextView) findViewById(R.id.section);
         remarks = (TextView) findViewById(R.id.remarks);
         rollno = (TextView) findViewById(R.id.rollno);
-        courses = (TextView) findViewById(R.id.course);
-
+        courses = (TextView) findViewById(R.id.subjects);
         parsejsondata(jsonFromDashboard);
-
     }
 
     public void parsejsondata(String jsonstring) {
@@ -75,27 +65,22 @@ public class ProfileActivity extends AppCompatActivity {
             String emailData = user.getString(Constants.EMAIL);
             String phoneData = user.getString(Constants.PHONE);
 
-            JSONObject classroom = jsonobj.getJSONObject(Constants.CLASSROOM);
-            String sectiondata=classroom.getString(Constants.SECTION);
-            String remarksdata=classroom.getString(Constants.REMARKS);
-
-            JSONObject organ = jsonobj.getJSONObject(Constants.ORGANIZATION);
-            String schooldata=organ.getString(Constants.SECTION);
-            String phonedata=organ.getString(Constants.PHONE);
 
             JSONObject scholar= jsonobj.getJSONObject(Constants.SCHOLAR);
-            String rollnodata=classroom.getString(Constants.ROLL_NO);
+            String rollnodata=scholar.getString(Constants.ROLL_NO);
+            String dob=scholar.getString("_dob");
+
 
 
             if (nameData != null && emailData != null && phoneData != null){
                 name.setText(nameData);
-                email.setText(emailData);
-                phone.setText(phoneData);
-                section.setText(sectiondata);
-                remarks.setText(remarksdata);
-                school.setText("School Studying in : "+ schooldata);
-                schphone.setText(phonedata);
-                rollno.setText(rollnodata);
+                email.setText("Email :"+emailData);
+                phone.setText("Contact :"+phoneData);
+                section.setText("Date of Birth :"+dob);
+                school.setText("School Studying in : ");
+                schphone.setText("School Phone No. :");
+                remarks.setText("Remarks : ");
+                rollno.setText("Student Roll No."+rollnodata);
                 courses.setText("Subjects Studing on : ");
 
             }
