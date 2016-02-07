@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +51,15 @@ public class ViewConversationAdapter extends RecyclerView.Adapter<ViewConversati
         holder.convname.setText(list.get(position)[2]);
         holder.message.setText(list.get(position)[0]);
         holder.time.setText(list.get(position)[1]);
-        if (list.get(position)[2].equalsIgnoreCase("By you")){
-            Log.v("yeah", String.valueOf(holder.convname.getText().toString().equals("By You")));
+        /*if (holder.convname.getText().toString().equalsIgnoreCase("By you")){
+           *//* Log.v("yeah", String.valueOf(holder.convname.getText().toString().equals("By You")));
             lp.gravity = Gravity.RIGHT;
-            holder.frameLayout.setLayoutParams(lp);
+            holder.frameLayout.setLayoutParams(lp);*//*
+            holder.convname.setTextColor(context.getResources().getColor(R.color.md_blue_700));
         }else {
             lp.gravity = Gravity.LEFT;
             holder.frameLayout.setLayoutParams(lp);
-        }
+        }*/
         Log.v("MyApp", list.get(position)[0]);
     }
 
