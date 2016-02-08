@@ -24,7 +24,7 @@
             android:title="Attendance" />
         <item
             android:id="@+id/nav_courses"
-            android:icon="@drawable/ic_assignment_ind_grey"
+            android:icon="@drawable/ic_book_grey"
             android:title="Courses" />
     </group>
 

@@ -274,7 +274,6 @@ public class DashBoard extends AppCompatActivity
         String attendance = jsonobj.getString(Constants.ATTENDANCE);
         attendanceRM.setText("Your percentage attendance for this month is " + attendance + " %");
 
-
     }
 
     public void showProgressDialog() {
