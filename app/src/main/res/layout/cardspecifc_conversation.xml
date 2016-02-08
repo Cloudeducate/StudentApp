@@ -18,7 +18,9 @@
         android:layout_marginTop="3dp"
         android:background="?selectableItemBackground"
         android:padding="10dp"
-        app:cardBackgroundColor="@color/md_white_1000"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="20dp"
+        app:cardBackgroundColor="@color/md_light_green_300"
         app:cardPreventCornerOverlap="false">
 
         <RelativeLayout
