@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/filename"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="10dp"
                 android:text="none"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/md_blue_grey_800"

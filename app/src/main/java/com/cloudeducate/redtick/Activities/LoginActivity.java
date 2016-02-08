@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -120,6 +121,12 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (error instanceof ParseError) {
                     Log.v(TAG, "Response = " + "ParseError");
                 }
+                progressDialog.dismiss();
+                new MaterialDialog.Builder(LoginActivity.this)
+                        .title("Error Connecting to Server")
+                        .content("Please connect your internet connection or retry after sometime")
+                        .positiveText("OK")
+                        .show();
             }
         }) {
             @Override
