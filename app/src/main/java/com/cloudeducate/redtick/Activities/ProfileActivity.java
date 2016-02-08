@@ -15,7 +15,6 @@ import com.cloudeducate.redtick.Utils.Constants;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private String jsonFromDashboard;
-    private TextView name, email, phone,school,schphone,rollno,section,remarks,courses;
+    private TextView name, email, phone, school, schphone, rollno, section, remarks, courses;
     SharedPreferences sharedpref;
 
     @Override
@@ -50,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         phone = (TextView) findViewById(R.id.phone);
         school = (TextView) findViewById(R.id.organisation);
         schphone = (TextView) findViewById(R.id.phoneno);
-       section = (TextView) findViewById(R.id.section);
+        section = (TextView) findViewById(R.id.section);
         remarks = (TextView) findViewById(R.id.remarks);
         rollno = (TextView) findViewById(R.id.rollno);
         courses = (TextView) findViewById(R.id.subjects);
@@ -66,24 +65,43 @@ public class ProfileActivity extends AppCompatActivity {
             String phoneData = user.getString(Constants.PHONE);
 
 
-            JSONObject scholar= jsonobj.getJSONObject(Constants.SCHOLAR);
-            String rollnodata=scholar.getString(Constants.ROLL_NO);
-            String dob=scholar.getString("_dob");
+            JSONObject scholar = jsonobj.getJSONObject(Constants.SCHOLAR);
+            String rollnodata = scholar.getString(Constants.ROLL_NO);
+            String dob = scholar.getString("_dob");
 
-
-
-            if (nameData != null && emailData != null && phoneData != null){
+            if (nameData != null) {
                 name.setText(nameData);
-                email.setText("Email :"+emailData);
-                phone.setText("Contact :"+phoneData);
-                section.setText("Date of Birth :"+dob);
-                school.setText("School Studying in : ");
-                schphone.setText("School Phone No. :");
-                remarks.setText("Remarks : ");
-                rollno.setText("Student Roll No."+rollnodata);
-                courses.setText("Subjects Studing on : ");
-
+            } else {
+                name.setText("Not Available");
             }
+
+            if (emailData!=null){
+                email.setText("Email :" + emailData);
+            }else {
+                email.setText("Email :" + emailData);
+            }
+            if (phoneData!=null){
+                phone.setText("Contact :" + phoneData);
+            }else {
+                phone.setText("Not Available");
+            }
+            if (dob!=null){
+                section.setText("Date of Birth :" + dob);
+            }else {
+                section.setText("Not Available");
+            }
+            if (rollnodata!=null) {
+                rollno.setText("Student Roll No." + rollnodata);
+            }else {
+                rollno.setText("Not Available");
+            }
+
+
+            school.setText("School Studying in : NA");
+            schphone.setText("School Phone No. : NA");
+            remarks.setText("Remarks : NA");
+
+            courses.setText("Subjects Studing on : NA");
 
         } catch (JSONException e) {
             e.printStackTrace();

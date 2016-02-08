@@ -14,10 +14,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,7 @@ public class DashBoard extends AppCompatActivity
     private RequestQueue requestQueue;
     private final String TAG="yahoo";
     private ProgressDialog progressDialog;
+    private CardView messageCardView, assignmentCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,21 @@ public class DashBoard extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        messageCardView = (CardView) findViewById(R.id.message_card);
+        assignmentCardView = (CardView) findViewById(R.id.assignmet_card);
+        messageCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoard.this, MessageActivity.class));
+            }
+        });
+        assignmentCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoard.this, AssignmentActivity.class));
+            }
+        });
 
         fetchDashBoardData();
 
