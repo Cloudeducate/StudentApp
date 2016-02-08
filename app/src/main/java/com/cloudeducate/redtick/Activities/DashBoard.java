@@ -62,6 +62,7 @@ public class DashBoard extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -75,21 +76,6 @@ public class DashBoard extends AppCompatActivity
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_WRITE_STORAGE);
         }
-
-        Bundle recieved=new Bundle();
-        recieved=getIntent().getExtras();
-        if(recieved!=null) {
-            jsondata = recieved.getString("key");
-            parsejsondata(jsondata);
-        }
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         totalAM = (TextView) findViewById(R.id.total_assgnment);
         completedAM = (TextView) findViewById(R.id.completed_assgnement);
@@ -109,21 +95,6 @@ public class DashBoard extends AppCompatActivity
 
     }
 
-    public void parsejsondata(String jsonstring)
-    {
-        try {
-            if(jsonstring!=null) {
-                JSONObject jsonobj = new JSONObject(jsonstring);
-                JSONObject user = jsonobj.getJSONObject(Constants.USER);
-                String name = user.getString(Constants.NAME);
-                String email = user.getString(Constants.EMAIL);
-                String phone = user.getString(Constants.PHONE);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -187,6 +158,16 @@ public class DashBoard extends AppCompatActivity
             Intent intent = new Intent(DashBoard.this, CourseActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.nav_logout) {
+            sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpref.edit();
+            editor.clear();
+            editor.commit();
+            DashBoard.this.finish();
+            Intent login=new Intent(this,LoginActivity.class);
+            startActivity(login);
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -220,6 +201,7 @@ public class DashBoard extends AppCompatActivity
             @Override
             public void onResponse(String response) {
 
+                jsondata=response;
                 try {
                     UpdateDashboard(response.toString());
                 } catch (JSONException e) {

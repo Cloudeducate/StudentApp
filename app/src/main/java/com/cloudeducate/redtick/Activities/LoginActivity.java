@@ -26,6 +26,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.cloudeducate.redtick.Model.Dashboard;
 import com.cloudeducate.redtick.R;
 import com.cloudeducate.redtick.Utils.Constants;
 import com.cloudeducate.redtick.Utils.URL;
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private ProgressDialog progressDialog;
     private Button login;
+    SharedPreferences sharedpref;
     private List<DashBoard> list = new ArrayList<DashBoard>();
     public static final String TAG = "MyApp";
     TextInputLayout usernameWrapper;
@@ -58,15 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
         passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
         usernameWrapper.setHint("Username");
@@ -77,19 +70,31 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 hideKeyboard();
                 loginrequest();
-                // Intent intent = new Intent(LoginActivity.this, DashBoard.class);
-                /*if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().setExitTransition(new Explode());
-                    startActivity(intent,
-                            ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
-                    finish();
-                } else {*/
-                //startActivity(intent);
-                //finish();
-                //}
             }
         });
 
+    }
+    @Override
+    public void onResume(){
+        sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+        if(sharedpref.contains(Constants.USERNNAME))
+        {
+            if (sharedpref.contains(Constants.PASSWORD)) {
+                Intent dashboard = new Intent(this, DashBoard.class);
+                startActivity(dashboard);
+            }
+
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if ((progressDialog != null) && progressDialog.isShowing())
+            progressDialog.dismiss();
+        progressDialog = null;
     }
 
     private void loginrequest() {
@@ -161,15 +166,15 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject jsonmeta = jsonObjMain.getJSONObject(Constants.META);
                 String metavalue = jsonmeta.getString(Constants.METAVALUE);
                 if (metavalue != null) {
-                    Bundle json = new Bundle();
-                    json.putString("key", jsonString);
 
                     SharedPreferences sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedpref.edit();
                     editor.putString(getString(R.string.metavalue), metavalue);
+                    editor.putString(Constants.USERNNAME,usernameWrapper.getEditText().getText().toString());
+                    editor.putString(Constants.PASSWORD, passwordWrapper.getEditText().getText().toString());
                     editor.commit();
 
-                    Intent dashboard = new Intent(this, DashBoard.class).putExtras(json);
+                    Intent dashboard = new Intent(this, DashBoard.class);
                     startActivity(dashboard);
                     finish();
                 }
