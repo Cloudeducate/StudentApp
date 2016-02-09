@@ -67,23 +67,12 @@ public class ResultActivity extends AppCompatActivity {
         metadata = sharedpref.getString(getString(R.string.metavalue), "null");
 
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         resulttask();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvresult);
         mRecyclerView.setLayoutManager(new com.cloudeducate.redtick.Utils.LinearLayoutManager(ResultActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
-
-        //fetchResult();
-
     }
 
     void resulttask() {

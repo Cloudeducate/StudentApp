@@ -53,7 +53,7 @@ public class AssignmentActivity extends AppCompatActivity {
     private List<Assignment> list = new ArrayList<Assignment>();
     private RecyclerView mRecyclerView;
     private SharedPreferences sharedpref;
-    private String course_id;
+    private String course_id="1";
     private String metadata;
     private AssignmentRecyclerviewAdapter assignmentRecyclerviewAdapter;
 
@@ -78,9 +78,7 @@ public class AssignmentActivity extends AppCompatActivity {
             success = myFolder.mkdirs();
 
             if (success) {
-                // Do something on success
-                /*Snackbar.make(getCurrentFocus().getRootView(), "created", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
+
 
             } else {
                 // Do something else on failure
@@ -94,14 +92,6 @@ public class AssignmentActivity extends AppCompatActivity {
         sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
         metadata = sharedpref.getString(getString(R.string.metavalue), "null");
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -109,7 +99,6 @@ public class AssignmentActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         subjectspinnertask();
-        //fetchData();
 
     }
 
@@ -126,10 +115,11 @@ public class AssignmentActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        spinner.setSelection(Integer.parseInt(course_id) - 1);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                course_id = Integer.toString(position);
+                course_id = Integer.toString(position+1);
                 fetchData();
             }
 
@@ -145,8 +135,8 @@ public class AssignmentActivity extends AppCompatActivity {
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
         showProgressDialog();
-        if (course_id == null) {
-            course_id = "0";
+        if (course_id.equals("null")) {
+            course_id = "1";
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL.getStudentAssignmentRequestURL(course_id), new Response.Listener<JSONObject>() {
             @Override

@@ -41,6 +41,17 @@ public class URL {
         return Constants.BASE_URL + url5;
     }
 
+    public static String getNotificationURL()
+    {
+        String url5="/notification/fetch";
+        return Constants.BASE_URL + url5;
+    }
+    public static String sendNotificationURL(String id)
+    {
+        String url5="/notification/update/";
+        return Constants.BASE_URL + url5+id+".json";
+    }
+
     public static String getConversationStart()
     {
         String url6 = "conversation/find.json";
