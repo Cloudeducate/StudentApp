@@ -77,7 +77,10 @@
                 android:layout_marginRight="@dimen/big_padding"
                 android:layout_marginTop="@dimen/big_padding"
                 android:padding="@dimen/big_padding"
-                app:cardCornerRadius="1dp">
+                app:cardCornerRadius="4dp"
+                app:cardBackgroundColor="@color/md_grey_300"
+                app:cardElevation="10dp"
+                >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -90,8 +93,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="Teacher's remark"
-                        android:textColor="@color/md_amber_900"
-                        android:textSize="18dp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="19dp" />
 
                     <TextView
                         android:id="@+id/course"

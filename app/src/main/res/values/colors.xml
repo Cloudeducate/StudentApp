@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ED3A3E</color>
-    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorPrimary">#3949AB</color>
+    <color name="colorPrimaryDark">#283593</color>
     <color name="colorAccent">@color/md_amber_500</color>
 
     <!-- google's material design colours from

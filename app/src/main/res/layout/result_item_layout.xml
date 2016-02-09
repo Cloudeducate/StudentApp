@@ -13,7 +13,10 @@
         android:layout_marginRight="@dimen/big_padding"
         android:layout_marginTop="@dimen/big_padding"
         android:layout_marginBottom="@dimen/big_padding"
-        card_view:cardCornerRadius="1dp">
+        card_view:cardCornerRadius="4dp"
+        card_view:cardBackgroundColor="@color/md_grey_300"
+        card_view:cardElevation="10dp"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="Exam Name"
-                android:textColor="@color/md_amber_900"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp" />
 
             <TextView

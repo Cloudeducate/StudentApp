@@ -19,8 +19,8 @@
         android:background="?selectableItemBackground"
         android:padding="10dp"
         app:cardCornerRadius="5dp"
-        app:cardElevation="20dp"
-        app:cardBackgroundColor="@color/md_light_green_300"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="@color/md_grey_300"
         app:cardPreventCornerOverlap="false">
 
         <RelativeLayout
@@ -60,10 +60,12 @@
                 android:text="Date and Time"
                 android:textSize="10sp"
                 android:textStyle="italic"
+                android:layout_marginLeft="50dp"
+                android:layout_alignParentRight="true"
                 android:textColor="@color/md_grey_600"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+
+               />
 
 
 

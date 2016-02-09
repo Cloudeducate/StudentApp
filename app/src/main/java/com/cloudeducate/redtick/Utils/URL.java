@@ -58,23 +58,7 @@ public class URL {
         return Constants.BASE_URL + url6;
     }
 
-    public static String getMessageRequestURL(String messageID)
-    {
-        String url7 = "conversation/message/" + messageID + ".json";
-        return Constants.BASE_URL + url7;
-    }
 
-    public static String getNotificationFetchURL()
-    {
-        String url8 = "notification/fetch.json";
-        return Constants.BASE_URL + url8;
-    }
-
-    public static String updateNotificationStatusURL(String notificationID)
-    {
-        String url9 = "notification/update/" + notificationID + ".json";
-        return Constants.BASE_URL + url9;
-    }
 
     public static String getconversation() {
         String url4 = "conversation/all.json";

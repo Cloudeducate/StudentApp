@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cloudeducate.redtick.R;
@@ -51,7 +53,8 @@ public class ViewConversationAdapter extends RecyclerView.Adapter<ViewConversati
         holder.convname.setText(list.get(position)[2]);
         holder.message.setText(list.get(position)[0]);
         holder.time.setText(list.get(position)[1]);
-        /*if (holder.convname.getText().toString().equalsIgnoreCase("By you")){
+        /*if (holder.convname.getText().toSt
+        ring().equalsIgnoreCase("By you")){
            *//* Log.v("yeah", String.valueOf(holder.convname.getText().toString().equals("By You")));
             lp.gravity = Gravity.RIGHT;
             holder.frameLayout.setLayoutParams(lp);*//*

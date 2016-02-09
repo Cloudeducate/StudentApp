@@ -187,6 +187,7 @@ public class AttendanceActivity extends AppCompatActivity implements OnDateSelec
                         String[] onlydate=date[0].split("-");
                         CalendarDay setday=CalendarDay.today();
                         Log.v(TAG,onlydate[0]+onlydate[1]+onlydate[2]+" " +title);
+                        onlydate[1]=Integer.toString(Integer.parseInt(onlydate[1])-1);
                         setday=CalendarDay.from(Integer.parseInt(onlydate[0]),Integer.parseInt(onlydate[1]),Integer.parseInt(onlydate[2]));
                         if(title.equals("Present")) {
                          Log.v(TAG,setday.toString()+title);

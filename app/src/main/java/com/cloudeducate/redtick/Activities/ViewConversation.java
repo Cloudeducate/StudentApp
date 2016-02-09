@@ -5,13 +5,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +62,7 @@ public class ViewConversation extends AppCompatActivity {
     private EditText messagesend;
     private Boolean success;
     private String conversation_id;
+    private CardView messageview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,7 @@ public class ViewConversation extends AppCompatActivity {
         messagetask();
         conview = (TextView) findViewById(R.id.Convname);
         send = (ImageView) findViewById(R.id.sendnewmessage);
+        messageview=(CardView)findViewById(R.id.messageCard);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,9 +176,12 @@ public class ViewConversation extends AppCompatActivity {
                     String[] string = new String[4];
                     string[0] = jsonObject.getString(Constants.CONTENT);
                     string[1] = jsonObject.getString(Constants.CREATED);
-                    if (jsonObject.getString(Constants.USER_ID).equals(useradmin))
+                    if (jsonObject.getString(Constants.USER_ID).equals(useradmin)) {
                         string[2] = "By You";
-                    else string[2] = "By Teacher";
+                    }
+                    else {
+                        string[2] = "By Teacher";
+                    }
                     string[3] = jsonObject.getString(Constants.LIVE);
 
                     Log.v(TAG, "test = " + String.valueOf(jsonObject.getString(Constants.CONTENT) + String.valueOf(jsonObject.getString(Constants.CREATED))));

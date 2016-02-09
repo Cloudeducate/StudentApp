@@ -26,7 +26,10 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="15dp"
                 android:background="?selectableItemBackground"
-                app:cardPreventCornerOverlap="false">
+                app:cardPreventCornerOverlap="false"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/md_grey_300"
+                app:cardCornerRadius="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -58,46 +61,12 @@
                                 android:singleLine="true"
                                 android:text="Assignment"
                                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                                android:textColor="@color/md_amber_900"
-                                android:textSize="18dp"
-                                android:textStyle="normal" />
+                                android:textColor="@color/md_blue_800"
+                                android:textSize="22dp"
+                                android:textStyle="normal"
+                                android:textIsSelectable="true" />
 
                         </LinearLayout>
-
-                        <!-- <LinearLayout
-                             android:layout_width="0dp"
-                             android:layout_height="match_parent"
-                             android:layout_weight="1"
-                             android:gravity="center|right">
-
-                             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                 android:id="@+id/restaurant_rating"
-                                 android:layout_width="40dp"
-                                 android:layout_height="25dp"
-                                 android:layout_gravity="center"
-                                 android:layout_marginRight="12dp"
-                                 android:background="?selectableItemBackground"
-                                 card_view:cardCornerRadius="6dp"
-                                 card_view:cardElevation="2dp"
-                                 card_view:cardPreventCornerOverlap="false">
-
-                                 <TextView
-                                     android:id="@+id/restaurant_rating_text"
-                                     android:layout_width="match_parent"
-                                     android:layout_height="wrap_content"
-                                     android:layout_gravity="center"
-                                     android:gravity="center"
-                                     android:text="3.9"
-                                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                     android:textColor="@color/md_green_500"
-                                     android:textSize="13dp"
-                                     android:textStyle="normal" />
-
-                             </android.support.v7.widget.CardView>
-
-                         </LinearLayout>-->
-
 
                     </LinearLayout>
 
@@ -190,7 +159,12 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="15dp"
                 android:background="?selectableItemBackground"
-                app:cardPreventCornerOverlap="false">
+                app:cardPreventCornerOverlap="false"
+                app:cardElevation="10dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                app:cardBackgroundColor="@color/md_grey_300"
+                app:cardCornerRadius="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -222,8 +196,8 @@
                                 android:singleLine="true"
                                 android:text="Messages"
                                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                                android:textColor="@color/md_amber_900"
-                                android:textSize="18dp"
+                                android:textColor="@color/md_blue_800"
+                                android:textSize="22dp"
                                 android:textStyle="normal" />
 
                         </LinearLayout>
@@ -244,7 +218,6 @@
                                 card_view:cardBackgroundColor="@color/md_red_600"
                                 card_view:cardElevation="2dp"
                                 card_view:cardPreventCornerOverlap="false">
-
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -300,7 +273,10 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="15dp"
                 android:background="?selectableItemBackground"
-                app:cardPreventCornerOverlap="false">
+                app:cardPreventCornerOverlap="false"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/md_grey_300">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -331,8 +307,8 @@
                                 android:singleLine="true"
                                 android:text="Result Update"
                                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                                android:textColor="@color/md_amber_900"
-                                android:textSize="18dp"
+                                android:textColor="@color/md_blue_800"
+                                android:textSize="22dp"
                                 android:textStyle="normal" />
 
                         </LinearLayout>
@@ -351,7 +327,7 @@
                                 android:layout_marginRight="12dp"
                                 android:background="?selectableItemBackground"
                                 card_view:cardBackgroundColor="@color/md_orange_400"
-                                card_view:cardElevation="2dp"
+                                card_view:cardElevation="5dp"
                                 card_view:cardPreventCornerOverlap="false">
 
                                 <TextView
@@ -387,14 +363,16 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/card_view"
+                android:id="@+id/card_viewperformance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="15dp"
                 android:padding="@dimen/big_padding"
-                app:cardCornerRadius="1dp">
+                app:cardCornerRadius="4dp"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/md_grey_300">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -407,8 +385,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="Teacher's remark"
-                        android:textColor="@color/md_amber_900"
-                        android:textSize="18dp" />
+                        android:textColor="@color/md_blue_800"
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/course"
@@ -459,7 +437,9 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="15dp"
                 android:padding="@dimen/big_padding"
-                app:cardCornerRadius="1dp">
+                app:cardCornerRadius="4dp"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/md_grey_300">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -472,8 +452,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="Attendance remark"
-                        android:textColor="@color/md_amber_900"
-                        android:textSize="18dp" />
+                        android:textColor="@color/md_blue_800"
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/from_date"

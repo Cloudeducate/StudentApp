@@ -26,7 +26,9 @@
             android:layout_marginBottom="@dimen/big_padding"
             android:layout_marginTop="150dp"
             android:padding="@dimen/big_padding"
-            app:cardCornerRadius="1dp">
+            app:cardCornerRadius="4dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/md_grey_300">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -40,8 +42,8 @@
                     android:layout_marginTop="40dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="Name"
-                    android:textColor="@color/md_amber_900"
-                    android:textSize="22sp" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="19dp" />
 
                 <TextView
                     android:id="@+id/email"
@@ -85,8 +87,8 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="Section "
-                    android:textColor="@color/md_amber_900"
-                    android:textSize="14sp" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/remarks"
@@ -119,8 +121,8 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="PHONE no. "
-                    android:textColor="@color/md_amber_900"
-                    android:textSize="14sp" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/subjects"

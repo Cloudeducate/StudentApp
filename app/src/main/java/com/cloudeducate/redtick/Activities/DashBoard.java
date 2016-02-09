@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +64,9 @@ public class DashBoard extends AppCompatActivity
     private RequestQueue requestQueue;
     private final String TAG="yahoo";
     private ProgressDialog progressDialog;
-    private CardView messageCardView, assignmentCardView,resultCardView,attendanceview;
+    private TextView nameview,classview;
+    private ImageView userimage;
+    private CardView messageCardView, assignmentCardView,resultCardView,attendanceview,performanceview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,29 +104,53 @@ public class DashBoard extends AppCompatActivity
         messageCardView = (CardView) findViewById(R.id.message_card);
         assignmentCardView = (CardView) findViewById(R.id.assignmet_card);
         resultCardView= (CardView) findViewById(R.id.resultcard);
-        attendanceview=(CardView) findViewById(R.id.assignmet_card);
+        attendanceview=(CardView) findViewById(R.id.cardattendance);
+        performanceview=(CardView) findViewById(R.id.card_viewperformance);
+        View view=navigationView.inflateHeaderView(R.layout.nav_header_dash_board);
+        nameview=(TextView)view.findViewById(R.id.username);
+        classview=(TextView) view.findViewById(R.id.classid);
+        userimage=(ImageView) view.findViewById(R.id.imageView);
+        userimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoard.this,DashBoard.class));
+            }
+        });
+
+        performanceview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performanceview.setCardElevation(25);
+                startActivity(new Intent(DashBoard.this, PerformanceActivity.class));
+            }
+        });
+
         attendanceview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashBoard.this,AttendanceActivity.class));
+                attendanceview.setCardElevation(25);
+                startActivity(new Intent(DashBoard.this, AttendanceActivity.class));
             }
         });
         resultCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashBoard.this,ResultActivity.class));
+                resultCardView.setCardElevation(25);
+                startActivity(new Intent(DashBoard.this, ResultActivity.class));
             }
         });
 
         messageCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                messageCardView.setCardElevation(25);
                 startActivity(new Intent(DashBoard.this, MessageActivity.class));
             }
         });
         assignmentCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                assignmentCardView.setCardElevation(25);
                 startActivity(new Intent(DashBoard.this, AssignmentActivity.class));
             }
         });
@@ -159,7 +186,8 @@ public class DashBoard extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent=new Intent(DashBoard.this,SettingsActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -293,6 +321,11 @@ public class DashBoard extends AppCompatActivity
         remainingAM.setText("Remaining assignment : " + String.valueOf(remaining));
         String attendance = jsonobj.getString(Constants.ATTENDANCE);
         attendanceRM.setText("Your percentage attendance for this month is " + attendance + " %");
+        JSONObject user=jsonobj.getJSONObject(Constants.USER);
+        nameview.setText("Welcome "+user.getString(Constants.NAME));
+        JSONObject org=jsonobj.getJSONObject(Constants.ORGANIZATION);
+        classview.setText("School Studying in: "+org.getString(Constants.NAME));
+
 
     }
 

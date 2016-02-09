@@ -15,7 +15,7 @@
         android:layout_marginBottom="@dimen/big_padding"
         card_view:cardCornerRadius="4dp"
         card_view:cardElevation="15dp"
-        card_view:cardBackgroundColor="@color/md_light_green_300"
+        card_view:cardBackgroundColor="@color/md_grey_300"
 
         >
 
@@ -30,8 +30,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="Title"
-                android:textColor="@color/md_amber_900"
-                android:textSize="16dp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/course"

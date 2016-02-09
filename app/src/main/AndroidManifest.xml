@@ -107,6 +107,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cloudeducate.redtick.Activities.MessageActivity" />
         </activity>
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
