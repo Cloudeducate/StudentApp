@@ -5,11 +5,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.cloudeducate.redtick.Activities.ResultActivity"
     tools:showIn="@layout/activity_result">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/layout_upper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/big_padding"
+                    android:paddingTop="@dimen/big_padding">
+
+                    <Spinner
+                        android:id="@+id/courses_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_padding"
+                        android:layout_marginLeft="@dimen/big_margin"
+                        android:layout_marginTop="@dimen/small_padding" />
+
+                    <!--
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Select Subject"
+                                    android:textSize="14dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="28dp"
+                                    android:layout_marginLeft="@dimen/big_margin"
+                                    android:fontFamily="sans-serif"
+                                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                                    android:textColor="@color/md_white_1000"
+                                    android:textStyle="bold"/>
+                    -->
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvresult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/big_margin" />
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_upper"
+                android:layout_marginBottom="@dimen/big_padding"
+                android:layout_marginLeft="@dimen/big_padding"
+                android:layout_marginRight="@dimen/big_padding"
+                android:layout_marginTop="@dimen/big_padding"
+                android:padding="@dimen/big_padding"
+                app:cardCornerRadius="4dp"
+                app:cardBackgroundColor="@color/md_grey_300"
+                app:cardElevation="10dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/big_margin">
+
+                    <TextView
+                        android:id="@+id/teacher_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Teacher's remark"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="19dp" />
+
+                    <TextView
+                        android:id="@+id/course"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/teacher_remark"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="Grade : "
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/course"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="Remark : Exhibits a positive outlook and attitude in the classroom"
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/course"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="150dp"
+                        android:layout_marginTop="10dp"
+                        android:text="A"
+                        android:textColor="@color/md_blue_grey_900"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

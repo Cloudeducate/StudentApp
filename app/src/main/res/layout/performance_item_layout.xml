@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/very_small_padding">
+
+        <TextView
+            android:id="@+id/week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teacher_name"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:text="Week : "
+            android:textColor="@color/md_blue_700"
+            android:textSize="14dp" />
+
+
+        <TextView
+            android:id="@+id/grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/week"
+            android:layout_alignBaseline="@id/week"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:text="Grade : "
+            android:textColor="@color/md_blue_500"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

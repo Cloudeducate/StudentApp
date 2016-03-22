@@ -12,6 +12,24 @@ public class Assignment {
     private String course;
     private Boolean submitted;
     private String filename;
+    private String marks;
+    private String remarks;
+
+    public String getMarks() {
+        return marks;
+    }
+
+    public void setMarks(String marks) {
+        this.marks = marks;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     /**
      *

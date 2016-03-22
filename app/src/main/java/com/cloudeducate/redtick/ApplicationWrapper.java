@@ -13,6 +13,13 @@ public class ApplicationWrapper extends Application {
     public void onCreate() {
         super.onCreate();
         applicationWrapper = this;
+        super.onCreate();
+        /*if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            Log.d("MyApp", "No SDCARD");
+        } else {
+            File directory = new File(Environment.getExternalStorageDirectory() + File.separator + Constants.AppFolderName);
+            directory.mkdirs();
+        }*/
     }
 
     public static ApplicationWrapper getApplicationWrapper() {

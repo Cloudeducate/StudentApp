@@ -1,12 +1,19 @@
 package com.cloudeducate.redtick.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -30,8 +37,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AssignmentActivity extends AppCompatActivity {
 
@@ -40,9 +52,13 @@ public class AssignmentActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private List<Assignment> list = new ArrayList<Assignment>();
     private RecyclerView mRecyclerView;
+    private SharedPreferences sharedpref;
+    private String course_id="1";
+    private String metadata;
     private AssignmentRecyclerviewAdapter assignmentRecyclerviewAdapter;
 
     public static final String TAG = "test";
+    private static final int REQUEST_WRITE_STORAGE = 112;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +67,67 @@ public class AssignmentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        boolean success = false;
+        Log.d(TAG, Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DOWNLOADS + "/" + Constants.AppFolderName);
+        File myFolder = new File(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DOWNLOADS + "/" + Constants.AppFolderName);
+
+        if (myFolder.exists()) {
+            Log.d(TAG, "FOLDER EXISTS");
+        } else {
+
+            success = myFolder.mkdirs();
+
+            if (success) {
+
+
+            } else {
+                // Do something else on failure
+                throw new RuntimeException("File Error in writing new folder");
             }
-        });*/
+        }
+
+        String path = myFolder.getPath();
+        Log.v(TAG, "path = " + path);
+
+        sharedpref = this.getSharedPreferences(getString(R.string.preference), Context.MODE_PRIVATE);
+        metadata = sharedpref.getString(getString(R.string.metavalue), "null");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(AssignmentActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
-        fetchData();
+        subjectspinnertask();
 
+    }
+
+    public void subjectspinnertask() {
+        Set<String> defaultval = new HashSet<String>();
+        defaultval.add("English");
+        defaultval.add("Mathmatics");
+        Set<String> values = sharedpref.getStringSet(getString(R.string.courses), defaultval);
+        Spinner spinner = (Spinner) findViewById(R.id.course_spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, values.toArray());
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setSelection(Integer.parseInt(course_id) - 1);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                course_id = Integer.toString(position+1);
+                fetchData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                fetchData();
+            }
+        });
     }
 
     public void fetchData() {
@@ -74,10 +135,12 @@ public class AssignmentActivity extends AppCompatActivity {
         volleySingleton = VolleySingleton.getMyInstance();
         requestQueue = volleySingleton.getRequestQueue();
         showProgressDialog();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL.getStudentAssignmentRequestURL(), new Response.Listener<JSONObject>() {
+        if (course_id.equals("null")) {
+            course_id = "1";
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL.getStudentAssignmentRequestURL(course_id), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                progressDialog.dismiss();
                 if (response.toString() == null) {
                     Log.v(TAG, "fetchData is not giving a fuck");
                 }
@@ -85,6 +148,7 @@ public class AssignmentActivity extends AppCompatActivity {
                 list = parseJson(response.toString());
                 assignmentRecyclerviewAdapter = new AssignmentRecyclerviewAdapter(AssignmentActivity.this, list);
                 mRecyclerView.setAdapter(assignmentRecyclerviewAdapter);
+                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -101,7 +165,17 @@ public class AssignmentActivity extends AppCompatActivity {
                     Log.v(TAG, "Response = " + "ParseError");
                 }
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("X-App", "student");
+                params.put("X-Access-Token", metadata);
+                return params;
+            }
+
+            ;
+        };
 
         requestQueue.add(jsonObjectRequest);
     }
@@ -133,6 +207,8 @@ public class AssignmentActivity extends AppCompatActivity {
                     assignment.setId(jsonObject.getString(Constants.ASSIGNMENT_ID));
                     assignment.setFilename(jsonObject.getString(Constants.ASSIGNMENT_FILNAME));
                     assignment.setSubmitted(Boolean.valueOf(jsonObject.getString(Constants.ASSIGNMENT_STATUS)));
+                    assignment.setMarks(jsonObject.getString(Constants.ASSIGNMENT_MARKS));
+                    assignment.setRemarks(jsonObject.getString(Constants.ASSIGNMENT_REMARKS));
 
                     Log.v(TAG, "test = " + String.valueOf(jsonObject.getString(Constants.ASSIGNMENT_TITLE)));
 
@@ -160,5 +236,6 @@ public class AssignmentActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.show();
     }
+
 
 }
